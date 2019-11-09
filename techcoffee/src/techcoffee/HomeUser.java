@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
-import static javax.swing.UIManager.getString;
 
 /**
  *
@@ -36,7 +35,10 @@ public class HomeUser extends javax.swing.JFrame {
                         int second=call.get(Calendar.SECOND);
                         int minute=call.get(Calendar.MINUTE);
                         int hour=call.get(Calendar.HOUR_OF_DAY);
-                        lbThu.setText("Thứ: "+thu);
+                        if(thu==1)
+                            lbThu.setText("Chủ Nhật");
+                        else
+                            lbThu.setText("Thứ: "+thu);
                         
                         lbDay.setText(""+day+"-"+month+"-"+year);
                         lbTime.setText(""+hour+":"+minute+":"+second);
@@ -66,21 +68,20 @@ public class HomeUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        side_pane = new javax.swing.JPanel();
-        btn_2 = new javax.swing.JPanel();
-        ind_2 = new javax.swing.JPanel();
-        lbThu2 = new javax.swing.JLabel();
-        btn_3 = new javax.swing.JPanel();
-        ind_3 = new javax.swing.JPanel();
-        lbThu3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnExit = new javax.swing.JLabel();
         btn_4 = new javax.swing.JPanel();
         ind_4 = new javax.swing.JPanel();
         lbThu4 = new javax.swing.JLabel();
+        btn_2 = new javax.swing.JPanel();
+        ind_2 = new javax.swing.JPanel();
+        lbThu2 = new javax.swing.JLabel();
         btn_5 = new javax.swing.JPanel();
         ind_5 = new javax.swing.JPanel();
         lbThu5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnExit = new javax.swing.JLabel();
+        btn_3 = new javax.swing.JPanel();
+        ind_3 = new javax.swing.JPanel();
+        lbThu3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -101,86 +102,21 @@ public class HomeUser extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        side_pane.setBackground(new java.awt.Color(23, 10, 35));
-        side_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(32, 90, 180));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_2.setBackground(new java.awt.Color(45, 57, 80));
-        btn_2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_2MousePressed(evt);
+        btnExit.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 1, 24)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-turnoff.png"))); // NOI18N
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
             }
         });
+        jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(852, 6, -1, 42));
 
-        ind_2.setPreferredSize(new java.awt.Dimension(3, 42));
-
-        javax.swing.GroupLayout ind_2Layout = new javax.swing.GroupLayout(ind_2);
-        ind_2.setLayout(ind_2Layout);
-        ind_2Layout.setHorizontalGroup(
-            ind_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-        ind_2Layout.setVerticalGroup(
-            ind_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
-        );
-
-        lbThu2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lbThu2.setForeground(new java.awt.Color(255, 255, 255));
-        lbThu2.setText("HOME");
-
-        javax.swing.GroupLayout btn_2Layout = new javax.swing.GroupLayout(btn_2);
-        btn_2.setLayout(btn_2Layout);
-        btn_2Layout.setHorizontalGroup(
-            btn_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_2Layout.createSequentialGroup()
-                .addComponent(ind_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(lbThu2)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        btn_2Layout.setVerticalGroup(
-            btn_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_2Layout.createSequentialGroup()
-                .addGroup(btn_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbThu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ind_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        side_pane.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 113, 110, -1));
-
-        btn_3.setBackground(new java.awt.Color(23, 10, 35));
-        btn_3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_3MousePressed(evt);
-            }
-        });
-        btn_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ind_3.setOpaque(false);
-        ind_3.setPreferredSize(new java.awt.Dimension(3, 42));
-
-        javax.swing.GroupLayout ind_3Layout = new javax.swing.GroupLayout(ind_3);
-        ind_3.setLayout(ind_3Layout);
-        ind_3Layout.setHorizontalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-        ind_3Layout.setVerticalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
-        );
-
-        btn_3.add(ind_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        lbThu3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lbThu3.setForeground(new java.awt.Color(255, 255, 255));
-        lbThu3.setText("Setting");
-        btn_3.add(lbThu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 42));
-
-        side_pane.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 110, -1));
-
-        btn_4.setBackground(new java.awt.Color(23, 10, 35));
+        btn_4.setBackground(new java.awt.Color(32, 90, 180));
         btn_4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_4MousePressed(evt);
@@ -195,23 +131,53 @@ public class HomeUser extends javax.swing.JFrame {
         ind_4.setLayout(ind_4Layout);
         ind_4Layout.setHorizontalGroup(
             ind_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         ind_4Layout.setVerticalGroup(
             ind_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        btn_4.add(ind_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btn_4.add(ind_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 3));
 
         lbThu4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbThu4.setForeground(new java.awt.Color(255, 255, 255));
         lbThu4.setText("USER");
-        btn_4.add(lbThu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 42));
+        btn_4.add(lbThu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 50));
 
-        side_pane.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 110, -1));
+        jPanel2.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 110, 50));
 
-        btn_5.setBackground(new java.awt.Color(23, 10, 35));
+        btn_2.setBackground(new java.awt.Color(45, 57, 80));
+        btn_2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_2MousePressed(evt);
+            }
+        });
+        btn_2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ind_2.setPreferredSize(new java.awt.Dimension(42, 3));
+
+        javax.swing.GroupLayout ind_2Layout = new javax.swing.GroupLayout(ind_2);
+        ind_2.setLayout(ind_2Layout);
+        ind_2Layout.setHorizontalGroup(
+            ind_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
+        ind_2Layout.setVerticalGroup(
+            ind_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        btn_2.add(ind_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 3));
+
+        lbThu2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lbThu2.setForeground(new java.awt.Color(255, 255, 255));
+        lbThu2.setText("HOME");
+        btn_2.add(lbThu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2, -1, 50));
+
+        jPanel2.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 120, 50));
+
+        btn_5.setBackground(new java.awt.Color(32, 90, 180));
         btn_5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_5MousePressed(evt);
@@ -226,54 +192,54 @@ public class HomeUser extends javax.swing.JFrame {
         ind_5.setLayout(ind_5Layout);
         ind_5Layout.setHorizontalGroup(
             ind_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         ind_5Layout.setVerticalGroup(
             ind_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        btn_5.add(ind_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btn_5.add(ind_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 3));
 
         lbThu5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbThu5.setForeground(new java.awt.Color(255, 255, 255));
         lbThu5.setText("Profile");
-        btn_5.add(lbThu5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 42));
+        btn_5.add(lbThu5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 50));
 
-        side_pane.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 110, -1));
+        jPanel2.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 110, 50));
 
-        getContentPane().add(side_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 490));
-
-        jPanel2.setBackground(new java.awt.Color(32, 90, 180));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-
-        btnExit.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 1, 24)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(255, 255, 255));
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-turnoff.png"))); // NOI18N
-        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExitMouseClicked(evt);
+        btn_3.setBackground(new java.awt.Color(32, 90, 180));
+        btn_3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_3MousePressed(evt);
             }
         });
+        btn_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(852, Short.MAX_VALUE)
-                .addComponent(btnExit)
-                .addGap(14, 14, 14))
+        ind_3.setOpaque(false);
+        ind_3.setPreferredSize(new java.awt.Dimension(3, 42));
+
+        javax.swing.GroupLayout ind_3Layout = new javax.swing.GroupLayout(ind_3);
+        ind_3.setLayout(ind_3Layout);
+        ind_3Layout.setHorizontalGroup(
+            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+        ind_3Layout.setVerticalGroup(
+            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 890, 50));
+        btn_3.add(ind_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 3));
+
+        lbThu3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lbThu3.setForeground(new java.awt.Color(255, 255, 255));
+        lbThu3.setText("Setting");
+        btn_3.add(lbThu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 50));
+
+        jPanel2.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 110, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 50));
 
         jPanel3.setBackground(new java.awt.Color(32, 90, 180));
 
@@ -383,15 +349,15 @@ public class HomeUser extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lbThu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbDay, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,12 +367,12 @@ public class HomeUser extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbThu)
                     .addComponent(lbDay))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
                 .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 260, 440));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 440));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -421,7 +387,7 @@ public class HomeUser extends javax.swing.JFrame {
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 630, 440));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 630, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -430,13 +396,6 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
-
-    private void btn_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MousePressed
-        // TODO add your handling code here:
-        setColor(btn_2);
-        ind_2.setOpaque(true);
-        resetColor(new JPanel[]{btn_4,btn_3,btn_5},new JPanel[]{ind_4,ind_3,ind_5});
-    }//GEN-LAST:event_btn_2MousePressed
 
     private void btn_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_4MousePressed
         // TODO add your handling code here:
@@ -458,6 +417,13 @@ public class HomeUser extends javax.swing.JFrame {
         ind_3.setOpaque(true);
         resetColor(new JPanel[]{btn_2,btn_5,btn_4},new JPanel[]{ind_2,ind_5,ind_4});
     }//GEN-LAST:event_btn_3MousePressed
+
+    private void btn_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MousePressed
+        // TODO add your handling code here:
+        setColor(btn_2);
+        ind_2.setOpaque(true);
+        resetColor(new JPanel[]{btn_4,btn_3,btn_5},new JPanel[]{ind_4,ind_3,ind_5});
+    }//GEN-LAST:event_btn_2MousePressed
 
     /**
      * @param args the command line arguments
@@ -500,7 +466,7 @@ public class HomeUser extends javax.swing.JFrame {
     
     private void resetColor(JPanel [] pane, JPanel [] indicators){
         for(int i=0; i<pane.length; i++){
-            pane[i].setBackground(new Color(23,10,35));
+            pane[i].setBackground(new Color(32,90,180));
         }
         for(int i=0; i<indicators.length; i++){
             indicators[i].setOpaque(false);
@@ -538,6 +504,5 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbThu4;
     private javax.swing.JLabel lbThu5;
     private javax.swing.JLabel lbTime;
-    private javax.swing.JPanel side_pane;
     // End of variables declaration//GEN-END:variables
 }
