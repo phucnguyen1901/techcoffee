@@ -5,7 +5,9 @@
  */
 package techcoffee;
 
+
 import java.awt.Color;
+import static java.lang.Thread.sleep;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ public class HomeUser extends javax.swing.JFrame {
     /**
      * Creates new form HomeUser
      */
-
+    
     public void clock(){
         
         Thread clock=new Thread(){
@@ -40,8 +42,31 @@ public class HomeUser extends javax.swing.JFrame {
                         else
                             lbThu.setText("Thứ: "+thu);
                         
+                        if(minute>=0 && minute <=9 )
+                                lbTime.setText(""+hour+":0"+minute);
+                        else
+                            lbTime.setText(""+hour+":"+minute);
+                        
+                         if(hour >=0 && hour <=9)
+                             if(minute>=0 && minute <=9 )
+                                lbTime.setText("0"+hour+":0"+minute);
+                             else
+                                lbTime.setText("0"+hour+":"+minute);
+                       
+                           
+                        
                         lbDay.setText(""+day+"-"+month+"-"+year);
-                        lbTime.setText(""+hour+":"+minute+":"+second);
+                        
+                        if(hour >=5 && hour <=10)
+                            lbWelcome.setText("Tôtô xin chúc quý khách buổi sáng vui vẻ !");
+                        else if(hour >10 && hour <=3)
+                            lbWelcome.setText("Tôtô xin chúc quý khách buổi trưa vui vẻ !");
+                        else if(hour >3 && hour <=6)
+                            lbWelcome.setText("Tôtô xin chúc quý khách buổi chiều vui vẻ !");
+                        else 
+                            lbWelcome.setText("Tôtô xin chúc quý khách buổi tối hạnh phúc !");
+                        
+                        
                         sleep(1000);
                    }
                 }catch(InterruptedException e){
@@ -53,6 +78,7 @@ public class HomeUser extends javax.swing.JFrame {
         clock.start();
         
     }
+    
 
     public HomeUser() {
         initComponents();
@@ -68,8 +94,7 @@ public class HomeUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        btnExit = new javax.swing.JLabel();
+        topPanel = new javax.swing.JPanel();
         btn_4 = new javax.swing.JPanel();
         ind_4 = new javax.swing.JPanel();
         lbThu4 = new javax.swing.JLabel();
@@ -82,39 +107,53 @@ public class HomeUser extends javax.swing.JFrame {
         btn_3 = new javax.swing.JPanel();
         ind_3 = new javax.swing.JPanel();
         lbThu3 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lbNameUser = new javax.swing.JLabel();
         lbTime = new javax.swing.JLabel();
         lbThu = new javax.swing.JLabel();
         lbDay = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        PanelHome = new javax.swing.JPanel();
+        btnOrder = new javax.swing.JButton();
+        btnGuide = new javax.swing.JButton();
+        lbStaff = new javax.swing.JLabel();
+        btnDailyCheck = new javax.swing.JButton();
+        lbOrder = new javax.swing.JLabel();
+        lbDailyCheckin = new javax.swing.JLabel();
+        lbHDSD = new javax.swing.JLabel();
+        btnContact = new javax.swing.JButton();
+        lbContact = new javax.swing.JLabel();
+        lbWelcome = new javax.swing.JLabel();
+        lbOrder3 = new javax.swing.JLabel();
+        lbOrder2 = new javax.swing.JLabel();
+        lbWelcome1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(32, 90, 180));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnExit.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 1, 24)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(255, 255, 255));
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-turnoff.png"))); // NOI18N
-        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExitMouseClicked(evt);
+        topPanel.setBackground(new java.awt.Color(32, 90, 180));
+        topPanel.setForeground(new java.awt.Color(255, 255, 255));
+        topPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                topPanelMouseDragged(evt);
             }
         });
-        jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(852, 6, -1, 42));
+        topPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topPanelMousePressed(evt);
+            }
+        });
+        topPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_4.setBackground(new java.awt.Color(32, 90, 180));
         btn_4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,7 +184,7 @@ public class HomeUser extends javax.swing.JFrame {
         lbThu4.setText("USER");
         btn_4.add(lbThu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 50));
 
-        jPanel2.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 110, 50));
+        topPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 110, 50));
 
         btn_2.setBackground(new java.awt.Color(45, 57, 80));
         btn_2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +214,7 @@ public class HomeUser extends javax.swing.JFrame {
         lbThu2.setText("HOME");
         btn_2.add(lbThu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2, -1, 50));
 
-        jPanel2.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 120, 50));
+        topPanel.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 120, 50));
 
         btn_5.setBackground(new java.awt.Color(32, 90, 180));
         btn_5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,7 +245,7 @@ public class HomeUser extends javax.swing.JFrame {
         lbThu5.setText("Profile");
         btn_5.add(lbThu5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 50));
 
-        jPanel2.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 110, 50));
+        topPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 110, 50));
 
         btn_3.setBackground(new java.awt.Color(32, 90, 180));
         btn_3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,17 +276,26 @@ public class HomeUser extends javax.swing.JFrame {
         lbThu3.setText("Setting");
         btn_3.add(lbThu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 50));
 
-        jPanel2.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 110, 50));
+        topPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 110, 50));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 50));
+        btnExit.setBackground(new java.awt.Color(32, 90, 180));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-turnoff.png"))); // NOI18N
+        btnExit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnExit.setBorderPainted(false);
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+        });
+        topPanel.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 70, 50));
+
+        getContentPane().add(topPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 50));
 
         jPanel3.setBackground(new java.awt.Color(32, 90, 180));
 
         jPanel4.setBackground(new java.awt.Color(97, 136, 198));
 
         jPanel5.setBackground(new java.awt.Color(32, 56, 151));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-email.png"))); // NOI18N
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-avatar.png"))); // NOI18N
 
@@ -257,21 +305,23 @@ public class HomeUser extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-giftbox.png"))); // NOI18N
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-notiffi.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel6)
@@ -281,12 +331,13 @@ public class HomeUser extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)))
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(23, 23, 23))
@@ -355,9 +406,8 @@ public class HomeUser extends javax.swing.JFrame {
                 .addComponent(lbDay, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,35 +417,79 @@ public class HomeUser extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbThu)
                     .addComponent(lbDay))
-                .addGap(57, 57, 57)
+                .addGap(56, 56, 56)
                 .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 440));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        PanelHome.setBackground(new java.awt.Color(255, 255, 255));
+        PanelHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+        btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+        btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-order.png"))); // NOI18N
+        btnOrder.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnOrder.setBorderPainted(false);
+        PanelHome.add(btnOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 130, 100));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 630, 440));
+        btnGuide.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-guide.png"))); // NOI18N
+        btnGuide.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGuide.setBorderPainted(false);
+        PanelHome.add(btnGuide, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 130, 100));
+
+        lbStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-staff.png"))); // NOI18N
+        PanelHome.add(lbStaff, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, 150));
+
+        btnDailyCheck.setBackground(new java.awt.Color(255, 255, 255));
+        btnDailyCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-dailycheck.png"))); // NOI18N
+        btnDailyCheck.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDailyCheck.setBorderPainted(false);
+        PanelHome.add(btnDailyCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 100));
+
+        lbOrder.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbOrder.setText("Đặt Bàn");
+        PanelHome.add(lbOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 80, 30));
+
+        lbDailyCheckin.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbDailyCheckin.setText("Tích Điểm ");
+        PanelHome.add(lbDailyCheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 90, 30));
+
+        lbHDSD.setFont(new java.awt.Font("Noto Sans CJK SC Bold", 1, 14)); // NOI18N
+        lbHDSD.setText("Hướng Dẫn ");
+        PanelHome.add(lbHDSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 100, 30));
+
+        btnContact.setBackground(new java.awt.Color(255, 255, 255));
+        btnContact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-email.png"))); // NOI18N
+        btnContact.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnContact.setBorderPainted(false);
+        PanelHome.add(btnContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 130, 100));
+
+        lbContact.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbContact.setText("Liên Hệ");
+        PanelHome.add(lbContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 90, 30));
+
+        lbWelcome.setFont(new java.awt.Font("Noto Sans CJK TC Thin", 1, 16)); // NOI18N
+        lbWelcome.setText("Tôtô xin chúc quý khách có một ngày vui vẻ !");
+        PanelHome.add(lbWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 500, 30));
+
+        lbOrder3.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
+        lbOrder3.setText("NameUser,");
+        PanelHome.add(lbOrder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 110, 30));
+
+        lbOrder2.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbOrder2.setText("Xin Chào");
+        PanelHome.add(lbOrder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 90, 30));
+
+        lbWelcome1.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbWelcome1.setText("TechCoffe hân hạnh được phục vụ quý khách !");
+        PanelHome.add(lbWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 500, 30));
+
+        getContentPane().add(PanelHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnExitMouseClicked
 
     private void btn_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_4MousePressed
         // TODO add your handling code here:
@@ -424,6 +518,26 @@ public class HomeUser extends javax.swing.JFrame {
         ind_2.setOpaque(true);
         resetColor(new JPanel[]{btn_4,btn_3,btn_5},new JPanel[]{ind_4,ind_3,ind_5});
     }//GEN-LAST:event_btn_2MousePressed
+
+    //Drag window 
+    int xx,xy;
+    private void topPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPanelMousePressed
+        // TODO add your handling code here:
+        xx=evt.getX();
+        xy=evt.getY();
+    }//GEN-LAST:event_topPanelMousePressed
+
+    private void topPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPanelMouseDragged
+        // TODO add your handling code here:
+        int x=evt.getXOnScreen();
+        int y=evt.getYOnScreen();
+        this.setLocation(x-xx,y-xy);
+    }//GEN-LAST:event_topPanelMouseDragged
+
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -475,7 +589,12 @@ public class HomeUser extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnExit;
+    private javax.swing.JPanel PanelHome;
+    private javax.swing.JButton btnContact;
+    private javax.swing.JButton btnDailyCheck;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnGuide;
+    private javax.swing.JButton btnOrder;
     private javax.swing.JPanel btn_2;
     private javax.swing.JPanel btn_3;
     private javax.swing.JPanel btn_4;
@@ -486,23 +605,31 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel ind_5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lbContact;
+    private javax.swing.JLabel lbDailyCheckin;
     private javax.swing.JLabel lbDay;
+    private javax.swing.JLabel lbHDSD;
     private javax.swing.JLabel lbNameUser;
+    private javax.swing.JLabel lbOrder;
+    private javax.swing.JLabel lbOrder2;
+    private javax.swing.JLabel lbOrder3;
+    private javax.swing.JLabel lbStaff;
     private javax.swing.JLabel lbThu;
     private javax.swing.JLabel lbThu2;
     private javax.swing.JLabel lbThu3;
     private javax.swing.JLabel lbThu4;
     private javax.swing.JLabel lbThu5;
     private javax.swing.JLabel lbTime;
+    private javax.swing.JLabel lbWelcome;
+    private javax.swing.JLabel lbWelcome1;
+    private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }
