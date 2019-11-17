@@ -9,6 +9,11 @@ package techcoffee;
  *
  * @author kobao
  */
+import java.awt.event.KeyEvent;
+import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -17,6 +22,11 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        //        if (rmbpasswd.isSelected()) {
+        //            username.setText(username.getText().toString());
+        //            passwd.setText(passwd.getText().toString());
+        //        }
+        ;
     }
 
     /**
@@ -31,8 +41,8 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        username = new javax.swing.JTextField();
+        passwd = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -41,6 +51,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -50,25 +61,40 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-lock -login.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 204, 102));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 180, 30));
+        username.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 180, 30));
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 204, 102));
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 30));
+        passwd.setBackground(new java.awt.Color(255, 204, 102));
+        passwd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwdKeyPressed(evt);
+            }
+        });
+        jPanel1.add(passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/log-in.png"))); // NOI18N
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 50, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 50, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 51));
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText(" No account? Create new account");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 350, 40));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 350, 40));
 
         jComboBox1.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "USER", "ADMIN" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, 30));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 153, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -85,16 +111,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,6 +119,124 @@ public class Login extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String selected = jComboBox1.getSelectedItem().toString();
+        if (selected.equals("ADMIN")) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+                PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+                pSm.setString(1, username.getText().toString());
+                pSm.setString(2, passwd.getText().toString());
+                pSm.setString(3, "1");
+                ResultSet rs = pSm.executeQuery();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Login is success");
+                    HomeAdmin ha = new HomeAdmin();
+                    ha.setVisible(true);
+                    ha.pack();
+                    ha.setLocationRelativeTo(null);
+                    ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login is not success");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Server error");
+            }
+
+        } else {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+                PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+                pSm.setString(1, username.getText());
+                pSm.setString(2, passwd.getText());
+                pSm.setString(3, "0");
+                ResultSet rs = pSm.executeQuery();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Login is success");
+                    HomeUser hu = new HomeUser();
+                    hu.setVisible(true);
+                    hu.pack();
+                    hu.setLocationRelativeTo(null);
+                    hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login is not success");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Server error");
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void passwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String selected = jComboBox1.getSelectedItem().toString();
+            if (selected.equals("ADMIN")) {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+                    pSm.setString(1, username.getText().toString());
+                    pSm.setString(2, passwd.getText().toString());
+                    pSm.setString(3, "1");
+                    ResultSet rs = pSm.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Login is success");
+                        HomeAdmin ha = new HomeAdmin();
+                        ha.setVisible(true);
+                        ha.pack();
+                        ha.setLocationRelativeTo(null);
+                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login is not success");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Server error");
+                }
+
+            } else {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+                    pSm.setString(1, username.getText());
+                    pSm.setString(2, passwd.getText());
+                    pSm.setString(3, "0");
+                    ResultSet rs = pSm.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Login is success");
+                        HomeUser hu = new HomeUser();
+                        hu.setVisible(true);
+                        hu.pack();
+                        hu.setLocationRelativeTo(null);
+                        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login is not success");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Server error");
+                }
+            }
+        }
+    }//GEN-LAST:event_passwdKeyPressed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        HomeUser hu = new HomeUser();
+        hu.setVisible(true);
+        hu.pack();
+        hu.setLocationRelativeTo(null);
+        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -147,7 +282,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField passwd;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
