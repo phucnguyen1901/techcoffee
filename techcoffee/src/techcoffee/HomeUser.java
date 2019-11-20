@@ -8,8 +8,14 @@ package techcoffee;
 
 import java.awt.Color;
 import static java.lang.Thread.sleep;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -76,13 +82,70 @@ public class HomeUser extends javax.swing.JFrame {
         };
         
         clock.start();
+        lbSo1.setBackground(Color.red);
+        
+    }
+    public void switchPanel(JPanel panel){
+        Container.removeAll();
+        Container.add(panel);
+        Container.repaint();
+        Container.revalidate();
+        //hihi la cardlayout
+    
+    }
+
+    Connection conn=null;
+    public void ConnectDatabase(){
+        
+        try{
+            
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
+            System.out.println("Thanh Cong");   
+            
+        }catch(Exception ex){
+            System.out.println("That Bai");
+            ex.printStackTrace();
+        }
+    }
+    public int getStatus(int i){
+        int xuat=0;
+        Statement stmt=null;
+        ResultSet rs =null;
+        
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("select xuatTT('so1')");
+            while(rs.next()){
+               xuat=rs.getInt("xuatTT('so1')");
+            }
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(stmt!= null){
+                try{
+                    stmt.close();
+                }catch(SQLException sqlEx){}
+                stmt=null;
+            }
+        }
+        return xuat;
         
     }
     
-
     public HomeUser() {
         initComponents();
         clock();
+        ConnectDatabase();
+        
+        
     }
 
     /**
@@ -122,6 +185,7 @@ public class HomeUser extends javax.swing.JFrame {
         lbTime = new javax.swing.JLabel();
         lbThu = new javax.swing.JLabel();
         lbDay = new javax.swing.JLabel();
+        Container = new javax.swing.JPanel();
         PanelHome = new javax.swing.JPanel();
         btnOrder = new javax.swing.JButton();
         btnGuide = new javax.swing.JButton();
@@ -136,6 +200,34 @@ public class HomeUser extends javax.swing.JFrame {
         lbOrder3 = new javax.swing.JLabel();
         lbOrder2 = new javax.swing.JLabel();
         lbWelcome1 = new javax.swing.JLabel();
+        PanelDatban = new javax.swing.JPanel();
+        btnBack = new javax.swing.JButton();
+        btnSo1 = new javax.swing.JButton();
+        btnSo2 = new javax.swing.JButton();
+        btnSo3 = new javax.swing.JButton();
+        btnSo4 = new javax.swing.JButton();
+        btnSo5 = new javax.swing.JButton();
+        btnSo6 = new javax.swing.JButton();
+        btnSo7 = new javax.swing.JButton();
+        btnSo8 = new javax.swing.JButton();
+        btnSo9 = new javax.swing.JButton();
+        btnSo10 = new javax.swing.JButton();
+        lbSo1 = new javax.swing.JLabel();
+        lbSo2 = new javax.swing.JLabel();
+        lbSo3 = new javax.swing.JLabel();
+        lbSo4 = new javax.swing.JLabel();
+        lbSo5 = new javax.swing.JLabel();
+        lbSo6 = new javax.swing.JLabel();
+        lbSo7 = new javax.swing.JLabel();
+        lbSo8 = new javax.swing.JLabel();
+        lbSo9 = new javax.swing.JLabel();
+        lbSo10 = new javax.swing.JLabel();
+        PanelTichdiem = new javax.swing.JPanel();
+        btnBack1 = new javax.swing.JButton();
+        PanelHuongdan = new javax.swing.JPanel();
+        btnBack2 = new javax.swing.JButton();
+        PanelLienhe = new javax.swing.JPanel();
+        btnBack3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -419,10 +511,12 @@ public class HomeUser extends javax.swing.JFrame {
                     .addComponent(lbDay))
                 .addGap(56, 56, 56)
                 .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 440));
+
+        Container.setLayout(new java.awt.CardLayout());
 
         PanelHome.setBackground(new java.awt.Color(255, 255, 255));
         PanelHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -431,12 +525,22 @@ public class HomeUser extends javax.swing.JFrame {
         btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-order.png"))); // NOI18N
         btnOrder.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnOrder.setBorderPainted(false);
+        btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOrderMouseClicked(evt);
+            }
+        });
         PanelHome.add(btnOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 130, 100));
 
         btnGuide.setBackground(new java.awt.Color(255, 255, 255));
         btnGuide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-guide.png"))); // NOI18N
         btnGuide.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuide.setBorderPainted(false);
+        btnGuide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuideMouseClicked(evt);
+            }
+        });
         PanelHome.add(btnGuide, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 130, 100));
 
         lbStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-staff.png"))); // NOI18N
@@ -446,6 +550,11 @@ public class HomeUser extends javax.swing.JFrame {
         btnDailyCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-dailycheck.png"))); // NOI18N
         btnDailyCheck.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDailyCheck.setBorderPainted(false);
+        btnDailyCheck.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDailyCheckMouseClicked(evt);
+            }
+        });
         PanelHome.add(btnDailyCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 100));
 
         lbOrder.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
@@ -464,6 +573,11 @@ public class HomeUser extends javax.swing.JFrame {
         btnContact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-email.png"))); // NOI18N
         btnContact.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnContact.setBorderPainted(false);
+        btnContact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnContactMouseClicked(evt);
+            }
+        });
         PanelHome.add(btnContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 130, 100));
 
         lbContact.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
@@ -486,7 +600,223 @@ public class HomeUser extends javax.swing.JFrame {
         lbWelcome1.setText("TechCoffe hân hạnh được phục vụ quý khách !");
         PanelHome.add(lbWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 500, 30));
 
-        getContentPane().add(PanelHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
+        Container.add(PanelHome, "card2");
+
+        PanelDatban.setBackground(new java.awt.Color(255, 255, 255));
+        PanelDatban.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBack.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        btnBack.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBack.setBorderPainted(false);
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 130, 100));
+
+        btnSo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo1.setBorderPainted(false);
+        btnSo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo1MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 100));
+
+        btnSo2.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo2.setBorderPainted(false);
+        btnSo2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo2MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 130, 100));
+
+        btnSo3.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo3.setBorderPainted(false);
+        btnSo3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo3MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 130, 100));
+
+        btnSo4.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo4.setBorderPainted(false);
+        btnSo4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo4MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 130, 100));
+
+        btnSo5.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo5.setBorderPainted(false);
+        btnSo5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo5MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 130, 100));
+
+        btnSo6.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo6.setBorderPainted(false);
+        btnSo6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo6MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 130, 100));
+
+        btnSo7.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo7.setBorderPainted(false);
+        btnSo7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo7MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 130, 100));
+
+        btnSo8.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo8.setBorderPainted(false);
+        btnSo8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo8MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 130, 100));
+
+        btnSo9.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo9.setBorderPainted(false);
+        btnSo9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo9MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 130, 100));
+
+        btnSo10.setBackground(new java.awt.Color(255, 255, 255));
+        btnSo10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
+        btnSo10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSo10.setBorderPainted(false);
+        btnSo10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSo10MouseClicked(evt);
+            }
+        });
+        PanelDatban.add(btnSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 130, 100));
+
+        lbSo1.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo1.setText("Bàn Số 1");
+        PanelDatban.add(lbSo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 90, 30));
+
+        lbSo2.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo2.setText("Bàn Số 2");
+        PanelDatban.add(lbSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 90, 30));
+
+        lbSo3.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo3.setText("Bàn Số 3");
+        PanelDatban.add(lbSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 90, 30));
+
+        lbSo4.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo4.setText("Bàn Số 4");
+        PanelDatban.add(lbSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 90, 30));
+
+        lbSo5.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo5.setText("Bàn Số 5");
+        PanelDatban.add(lbSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 90, 30));
+
+        lbSo6.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo6.setText("Bàn Số 6");
+        PanelDatban.add(lbSo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 90, 30));
+
+        lbSo7.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo7.setText("Bàn Số 7");
+        PanelDatban.add(lbSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 90, 30));
+
+        lbSo8.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo8.setText("Bàn Số 8");
+        PanelDatban.add(lbSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 90, 30));
+
+        lbSo9.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo9.setText("Bàn Số 9");
+        PanelDatban.add(lbSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 90, 30));
+
+        lbSo10.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
+        lbSo10.setText("Bàn Số 10");
+        PanelDatban.add(lbSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 90, 30));
+
+        Container.add(PanelDatban, "card3");
+
+        PanelTichdiem.setBackground(new java.awt.Color(255, 255, 255));
+        PanelTichdiem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBack1.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        btnBack1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBack1.setBorderPainted(false);
+        btnBack1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBack1MouseClicked(evt);
+            }
+        });
+        PanelTichdiem.add(btnBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
+
+        Container.add(PanelTichdiem, "card3");
+
+        PanelHuongdan.setBackground(new java.awt.Color(255, 255, 255));
+        PanelHuongdan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBack2.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        btnBack2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBack2.setBorderPainted(false);
+        btnBack2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBack2MouseClicked(evt);
+            }
+        });
+        PanelHuongdan.add(btnBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
+
+        Container.add(PanelHuongdan, "card3");
+
+        PanelLienhe.setBackground(new java.awt.Color(255, 255, 255));
+        PanelLienhe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBack3.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        btnBack3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBack3.setBorderPainted(false);
+        btnBack3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBack3MouseClicked(evt);
+            }
+        });
+        PanelLienhe.add(btnBack3, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
+
+        Container.add(PanelLienhe, "card3");
+
+        getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -539,6 +869,92 @@ public class HomeUser extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
+    private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelDatban);
+    }//GEN-LAST:event_btnOrderMouseClicked
+
+    private void btnBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_btnBack1MouseClicked
+
+    private void btnBack2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack2MouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_btnBack2MouseClicked
+
+    private void btnBack3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack3MouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_btnBack3MouseClicked
+
+    private void btnDailyCheckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDailyCheckMouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelTichdiem);
+    }//GEN-LAST:event_btnDailyCheckMouseClicked
+
+    private void btnGuideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuideMouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelHuongdan);
+    }//GEN-LAST:event_btnGuideMouseClicked
+
+    private void btnContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContactMouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelLienhe);
+    }//GEN-LAST:event_btnContactMouseClicked
+
+    private void btnSo10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo10MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo10MouseClicked
+
+    private void btnSo9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo9MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo9MouseClicked
+
+    private void btnSo8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo8MouseClicked
+
+    private void btnSo7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo7MouseClicked
+
+    private void btnSo6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo6MouseClicked
+
+    private void btnSo5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo5MouseClicked
+
+    private void btnSo4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo4MouseClicked
+
+    private void btnSo3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo3MouseClicked
+
+    private void btnSo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSo2MouseClicked
+
+    private void btnSo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo1MouseClicked
+        // TODO add your handling code here:
+        int soban=1;
+        int temp;
+        temp=getStatus(soban);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+    }//GEN-LAST:event_btnSo1MouseClicked
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        // TODO add your handling code here:
+        
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_btnBackMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -589,12 +1005,31 @@ public class HomeUser extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Container;
+    private javax.swing.JPanel PanelDatban;
     private javax.swing.JPanel PanelHome;
+    private javax.swing.JPanel PanelHuongdan;
+    private javax.swing.JPanel PanelLienhe;
+    private javax.swing.JPanel PanelTichdiem;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBack1;
+    private javax.swing.JButton btnBack2;
+    private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnDailyCheck;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGuide;
     private javax.swing.JButton btnOrder;
+    private javax.swing.JButton btnSo1;
+    private javax.swing.JButton btnSo10;
+    private javax.swing.JButton btnSo2;
+    private javax.swing.JButton btnSo3;
+    private javax.swing.JButton btnSo4;
+    private javax.swing.JButton btnSo5;
+    private javax.swing.JButton btnSo6;
+    private javax.swing.JButton btnSo7;
+    private javax.swing.JButton btnSo8;
+    private javax.swing.JButton btnSo9;
     private javax.swing.JPanel btn_2;
     private javax.swing.JPanel btn_3;
     private javax.swing.JPanel btn_4;
@@ -621,6 +1056,16 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbOrder;
     private javax.swing.JLabel lbOrder2;
     private javax.swing.JLabel lbOrder3;
+    private javax.swing.JLabel lbSo1;
+    private javax.swing.JLabel lbSo10;
+    private javax.swing.JLabel lbSo2;
+    private javax.swing.JLabel lbSo3;
+    private javax.swing.JLabel lbSo4;
+    private javax.swing.JLabel lbSo5;
+    private javax.swing.JLabel lbSo6;
+    private javax.swing.JLabel lbSo7;
+    private javax.swing.JLabel lbSo8;
+    private javax.swing.JLabel lbSo9;
     private javax.swing.JLabel lbStaff;
     private javax.swing.JLabel lbThu;
     private javax.swing.JLabel lbThu2;
