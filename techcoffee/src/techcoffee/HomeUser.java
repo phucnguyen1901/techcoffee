@@ -7,14 +7,19 @@ package techcoffee;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -27,7 +32,8 @@ public class HomeUser extends javax.swing.JFrame {
     /**
      * Creates new form HomeUser
      */
-    
+    String bann;
+    int soban;
     public void clock(){
         
         Thread clock=new Thread(){
@@ -109,16 +115,17 @@ public class HomeUser extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    public int getStatus(int i){
+    public int getStatus(String ban){
         int xuat=0;
-        Statement stmt=null;
+        PreparedStatement pStmt=null;
         ResultSet rs =null;
         
         try{
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("select xuatTT('so1')");
+            pStmt = conn.prepareStatement("select xuatTT(?)");
+            pStmt.setString(1, ban);
+            rs=pStmt.executeQuery();
             while(rs.next()){
-               xuat=rs.getInt("xuatTT('so1')");
+               xuat=rs.getInt(1); 
             }
         }catch(Exception ex){
             System.out.println("SQL exception: "+ex.getMessage());
@@ -130,15 +137,66 @@ public class HomeUser extends javax.swing.JFrame {
                }catch(SQLException sqlEx){}
                rs=null;
             }
-            if(stmt!= null){
+            if(pStmt!= null){
                 try{
-                    stmt.close();
+                    pStmt.close();
                 }catch(SQLException sqlEx){}
-                stmt=null;
+                pStmt=null;
             }
         }
         return xuat;
         
+    }
+    
+    void dangDat(String ban){
+        CallableStatement cStmt = null; 
+        ResultSet rs =null;
+        try{
+        cStmt = conn.prepareCall("{call dangdat(?)}"); 
+        cStmt.setString(1, ban); 
+        rs = cStmt.executeQuery();
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(cStmt!= null){
+                try{
+                    cStmt.close();
+                }catch(SQLException sqlEx){}
+                cStmt=null;
+            }
+        }
+    }
+    void dungXong(String ban){
+        CallableStatement cStmt = null; 
+        ResultSet rs =null;
+        try{
+        cStmt = conn.prepareCall("{call dungXong(?)}"); 
+        cStmt.setString(1, ban); 
+        rs = cStmt.executeQuery();
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(cStmt!= null){
+                try{
+                    cStmt.close();
+                }catch(SQLException sqlEx){}
+                cStmt=null;
+            }
+        }
     }
     
     public HomeUser() {
@@ -146,6 +204,9 @@ public class HomeUser extends javax.swing.JFrame {
         clock();
         ConnectDatabase();
         
+  
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         
     }
 
@@ -202,7 +263,6 @@ public class HomeUser extends javax.swing.JFrame {
         lbOrder2 = new javax.swing.JLabel();
         lbWelcome1 = new javax.swing.JLabel();
         PanelDatban = new javax.swing.JPanel();
-        btnBack = new javax.swing.JButton();
         btnSo1 = new javax.swing.JButton();
         btnSo2 = new javax.swing.JButton();
         btnSo3 = new javax.swing.JButton();
@@ -223,12 +283,15 @@ public class HomeUser extends javax.swing.JFrame {
         lbSo8 = new javax.swing.JLabel();
         lbSo9 = new javax.swing.JLabel();
         lbSo10 = new javax.swing.JLabel();
+        lbBack = new javax.swing.JLabel();
         PanelTichdiem = new javax.swing.JPanel();
         btnBack1 = new javax.swing.JButton();
         PanelHuongdan = new javax.swing.JPanel();
         btnBack2 = new javax.swing.JButton();
         PanelLienhe = new javax.swing.JPanel();
         btnBack3 = new javax.swing.JButton();
+        PanelFormDB = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -380,7 +443,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnExitMouseClicked(evt);
             }
         });
-        topPanel.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 70, 50));
+        topPanel.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 0, 40, 50));
 
         getContentPane().add(topPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 50));
 
@@ -439,6 +502,11 @@ public class HomeUser extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-user.png"))); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-logout.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         lbNameUser.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbNameUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -606,17 +674,6 @@ public class HomeUser extends javax.swing.JFrame {
         PanelDatban.setBackground(new java.awt.Color(255, 255, 255));
         PanelDatban.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBack.setBackground(new java.awt.Color(255, 255, 255));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
-        btnBack.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBack.setBorderPainted(false);
-        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBackMouseClicked(evt);
-            }
-        });
-        PanelDatban.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 130, 100));
-
         btnSo1.setBackground(new java.awt.Color(255, 255, 255));
         btnSo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
         btnSo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -767,6 +824,14 @@ public class HomeUser extends javax.swing.JFrame {
         lbSo10.setText("Bàn Số 10");
         PanelDatban.add(lbSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 90, 30));
 
+        lbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        lbBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbBackMouseClicked(evt);
+            }
+        });
+        PanelDatban.add(lbBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, 60));
+
         Container.add(PanelDatban, "card3");
 
         PanelTichdiem.setBackground(new java.awt.Color(255, 255, 255));
@@ -816,6 +881,19 @@ public class HomeUser extends javax.swing.JFrame {
         PanelLienhe.add(btnBack3, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
 
         Container.add(PanelLienhe, "card3");
+
+        PanelFormDB.setBackground(new java.awt.Color(255, 255, 255));
+        PanelFormDB.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Hủy Đặt");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        PanelFormDB.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
+
+        Container.add(PanelFormDB, "card3");
 
         getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
 
@@ -867,6 +945,7 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
+        dungXong(bann);
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
@@ -907,54 +986,162 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void btnSo10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo10MouseClicked
         // TODO add your handling code here:
+        bann="So10";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo10MouseClicked
 
     private void btnSo9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo9MouseClicked
         // TODO add your handling code here:
+        bann="So9";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo9MouseClicked
 
     private void btnSo8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo8MouseClicked
         // TODO add your handling code here:
+        bann="So8";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo8MouseClicked
 
     private void btnSo7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo7MouseClicked
         // TODO add your handling code here:
+        bann="So7";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo7MouseClicked
 
     private void btnSo6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo6MouseClicked
         // TODO add your handling code here:
+        bann="So6";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo6MouseClicked
 
     private void btnSo5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo5MouseClicked
         // TODO add your handling code here:
+        bann="So5";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo5MouseClicked
 
     private void btnSo4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo4MouseClicked
         // TODO add your handling code here:
+        bann="So4";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo4MouseClicked
 
     private void btnSo3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo3MouseClicked
         // TODO add your handling code here:
+        bann="So3";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo3MouseClicked
 
     private void btnSo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo2MouseClicked
         // TODO add your handling code here:
+        soban=2;
+        bann="So2";
+        int temp;
+        temp=getStatus(bann);
+        if(temp==2)
+            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
     }//GEN-LAST:event_btnSo2MouseClicked
 
     private void btnSo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSo1MouseClicked
         // TODO add your handling code here:
-        int soban=1;
+        soban=1;
+        bann="So1";
         int temp;
-        temp=getStatus(soban);
+        temp=getStatus(bann);
         if(temp==2)
             JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else{
+        dangDat(bann);
+        switchPanel(PanelFormDB);
+        }
+        
+//        int temp;
+//        temp=getStatus(soban);
+//        if(temp==2)
+//            JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
     }//GEN-LAST:event_btnSo1MouseClicked
 
-    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+    private void lbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBackMouseClicked
         // TODO add your handling code here:
-        
         switchPanel(PanelHome);
-    }//GEN-LAST:event_btnBackMouseClicked
+    }//GEN-LAST:event_lbBackMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        Login login=new Login();
+        login.setVisible(true);
+        login.pack();
+        login.setLocationRelativeTo(null);
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        dungXong(bann);
+        switchPanel(PanelDatban);
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1008,11 +1195,11 @@ public class HomeUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel PanelDatban;
+    private javax.swing.JPanel PanelFormDB;
     private javax.swing.JPanel PanelHome;
     private javax.swing.JPanel PanelHuongdan;
     private javax.swing.JPanel PanelLienhe;
     private javax.swing.JPanel PanelTichdiem;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnBack2;
     private javax.swing.JButton btnBack3;
@@ -1039,6 +1226,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel ind_3;
     private javax.swing.JPanel ind_4;
     private javax.swing.JPanel ind_5;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -1049,6 +1237,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lbBack;
     private javax.swing.JLabel lbContact;
     private javax.swing.JLabel lbDailyCheckin;
     private javax.swing.JLabel lbDay;
