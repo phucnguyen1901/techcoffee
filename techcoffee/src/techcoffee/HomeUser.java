@@ -90,6 +90,7 @@ public class HomeUser extends javax.swing.JFrame {
         Container.add(panel);
         Container.repaint();
         Container.revalidate();
+        
         //hihi la cardlayout
     
     }
@@ -101,7 +102,7 @@ public class HomeUser extends javax.swing.JFrame {
             
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
-            System.out.println("Thanh Cong");   
+            System.out.println("Sucess");   
             
         }catch(Exception ex){
             System.out.println("That Bai");
