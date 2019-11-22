@@ -919,8 +919,8 @@ public class HomeUser extends javax.swing.JFrame {
         PanelFormDB.add(cbxBanNguoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Các yêu cầu khác  :        ");
-        PanelFormDB.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 30));
+        jLabel9.setText("Các yêu cầu khác      :        ");
+        PanelFormDB.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 170, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Thời gian đặt   :");
@@ -930,7 +930,7 @@ public class HomeUser extends javax.swing.JFrame {
         PanelFormDB.add(cbxTimeDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Bàn              :");
+        jLabel11.setText("Số người       :");
         PanelFormDB.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, 30));
 
         jTextArea1.setColumns(20);
