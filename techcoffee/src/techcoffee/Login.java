@@ -19,19 +19,25 @@ import javax.swing.JTextField;
 public class Login extends javax.swing.JFrame {
 
     private String usernamelogin1;
-    
+    public String usernamee;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        //for getusern
+        usernamee= username.getText().toString();
         //        if (rmbpasswd.isSelected()) {
         //            username.setText(username.getText().toString());
         //            passwd.setText(passwd.getText().toString());
         //        }
 
         
+    }
+    //getuser name 
+    public String getUser(){
+        return usernamee;
     }
     
 
@@ -68,6 +74,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         username.setBackground(new java.awt.Color(255, 204, 102));
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
         jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 180, 30));
 
         passwd.setBackground(new java.awt.Color(255, 204, 102));
@@ -245,6 +256,10 @@ public class Login extends javax.swing.JFrame {
         hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments

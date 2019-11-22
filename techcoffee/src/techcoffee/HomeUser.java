@@ -207,7 +207,8 @@ public class HomeUser extends javax.swing.JFrame {
   
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        
+        Login login = new Login();
+        lbNameuser.setText(login.getUser());
     }
 
     /**
@@ -243,7 +244,7 @@ public class HomeUser extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lbNameUser = new javax.swing.JLabel();
+        lbNameuser = new javax.swing.JLabel();
         lbTime = new javax.swing.JLabel();
         lbThu = new javax.swing.JLabel();
         lbDay = new javax.swing.JLabel();
@@ -284,6 +285,7 @@ public class HomeUser extends javax.swing.JFrame {
         lbSo9 = new javax.swing.JLabel();
         lbSo10 = new javax.swing.JLabel();
         lbBack = new javax.swing.JLabel();
+        lbWelcome2 = new javax.swing.JLabel();
         PanelTichdiem = new javax.swing.JPanel();
         btnBack1 = new javax.swing.JButton();
         PanelHuongdan = new javax.swing.JPanel();
@@ -293,6 +295,14 @@ public class HomeUser extends javax.swing.JFrame {
         PanelFormDB = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnDat = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cbxBanNguoi = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbxTimeDat = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -509,9 +519,9 @@ public class HomeUser extends javax.swing.JFrame {
             }
         });
 
-        lbNameUser.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lbNameUser.setForeground(new java.awt.Color(255, 255, 255));
-        lbNameUser.setText("NameUser");
+        lbNameuser.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lbNameuser.setForeground(new java.awt.Color(255, 255, 255));
+        lbNameuser.setText("NameUser");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -522,7 +532,7 @@ public class HomeUser extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbNameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbNameuser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27))
@@ -538,7 +548,7 @@ public class HomeUser extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNameUser)
+                            .addComponent(lbNameuser)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -831,7 +841,11 @@ public class HomeUser extends javax.swing.JFrame {
                 lbBackMouseClicked(evt);
             }
         });
-        PanelDatban.add(lbBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, 60));
+        PanelDatban.add(lbBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, -1, 60));
+
+        lbWelcome2.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbWelcome2.setText("Lưu ý: Quý khách chỉ được đặt bàn trong ngày !");
+        PanelDatban.add(lbWelcome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 500, 30));
 
         Container.add(PanelDatban, "card3");
 
@@ -896,6 +910,34 @@ public class HomeUser extends javax.swing.JFrame {
 
         btnDat.setText("Đặt");
         PanelFormDB.add(btnDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("tính từ bây giờ.");
+        PanelFormDB.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 100, 30));
+
+        cbxBanNguoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 người", "2 người", "3 người", "4 người", "5 người", "6 người", "hơn 6 người" }));
+        PanelFormDB.add(cbxBanNguoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Các yêu cầu khác  :        ");
+        PanelFormDB.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Thời gian đặt   :");
+        PanelFormDB.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 100, 30));
+
+        cbxTimeDat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 phút", "30 phút", "45 phút", "1 giờ", "1 giờ 30 phút", "2 giờ", "2 giờ 30 phút", "3 giờ" }));
+        PanelFormDB.add(cbxTimeDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 30));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Bàn              :");
+        PanelFormDB.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, 30));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        PanelFormDB.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 260, 140));
 
         Container.add(PanelFormDB, "card3");
 
@@ -1145,7 +1187,7 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         dungXong(bann);
         switchPanel(PanelDatban);
-        
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -1228,27 +1270,35 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel btn_3;
     private javax.swing.JPanel btn_4;
     private javax.swing.JPanel btn_5;
+    private javax.swing.JComboBox<String> cbxBanNguoi;
+    private javax.swing.JComboBox<String> cbxTimeDat;
     private javax.swing.JPanel ind_2;
     private javax.swing.JPanel ind_3;
     private javax.swing.JPanel ind_4;
     private javax.swing.JPanel ind_5;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbBack;
     private javax.swing.JLabel lbContact;
     private javax.swing.JLabel lbDailyCheckin;
     private javax.swing.JLabel lbDay;
     private javax.swing.JLabel lbHDSD;
-    private javax.swing.JLabel lbNameUser;
+    private javax.swing.JLabel lbNameuser;
     private javax.swing.JLabel lbOrder;
     private javax.swing.JLabel lbOrder2;
     private javax.swing.JLabel lbOrder3;
@@ -1271,6 +1321,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbTime;
     private javax.swing.JLabel lbWelcome;
     private javax.swing.JLabel lbWelcome1;
+    private javax.swing.JLabel lbWelcome2;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }
