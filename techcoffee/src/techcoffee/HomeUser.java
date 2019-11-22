@@ -1022,6 +1022,7 @@ public class HomeUser extends javax.swing.JFrame {
         if(temp==2)
             JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
         else{
+            
         dangDat(bann);
         switchPanel(PanelFormDB);
         }
