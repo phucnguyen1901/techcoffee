@@ -9,13 +9,17 @@ package techcoffee;
  *
  * @author kobao
  */
+
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
 
+    private String usernamelogin1;
+    
     /**
      * Creates new form Login
      */
@@ -26,8 +30,10 @@ public class Login extends javax.swing.JFrame {
         //            username.setText(username.getText().toString());
         //            passwd.setText(passwd.getText().toString());
         //        }
-        ;
+
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,15 +132,17 @@ public class Login extends javax.swing.JFrame {
         if (selected.equals("ADMIN")) {
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
-                PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qqq?useSSL=false", "root", "000001");
+                PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
                 pSm.setString(3, "1");
                 ResultSet rs = pSm.executeQuery();
+              
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(null, "Login is success");
                     HomeAdmin ha = new HomeAdmin();
+                    ha.usernamelogin.setText(this.username.getText().toString());
                     ha.setVisible(true);
                     ha.pack();
                     ha.setLocationRelativeTo(null);
