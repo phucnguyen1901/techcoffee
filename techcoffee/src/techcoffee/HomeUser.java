@@ -292,6 +292,7 @@ public class HomeUser extends javax.swing.JFrame {
         btnBack3 = new javax.swing.JButton();
         PanelFormDB = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        btnDat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -337,7 +338,7 @@ public class HomeUser extends javax.swing.JFrame {
 
         lbThu4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbThu4.setForeground(new java.awt.Color(255, 255, 255));
-        lbThu4.setText("USER");
+        lbThu4.setText("History");
         btn_4.add(lbThu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 50));
 
         topPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 110, 50));
@@ -694,7 +695,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo2MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 130, 100));
+        PanelDatban.add(btnSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 130, 100));
 
         btnSo3.setBackground(new java.awt.Color(255, 255, 255));
         btnSo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -705,7 +706,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo3MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 130, 100));
+        PanelDatban.add(btnSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 130, 100));
 
         btnSo4.setBackground(new java.awt.Color(255, 255, 255));
         btnSo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -716,7 +717,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo4MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 130, 100));
+        PanelDatban.add(btnSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 130, 100));
 
         btnSo5.setBackground(new java.awt.Color(255, 255, 255));
         btnSo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -727,7 +728,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo5MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 130, 100));
+        PanelDatban.add(btnSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 130, 100));
 
         btnSo6.setBackground(new java.awt.Color(255, 255, 255));
         btnSo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -749,7 +750,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo7MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 130, 100));
+        PanelDatban.add(btnSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 130, 100));
 
         btnSo8.setBackground(new java.awt.Color(255, 255, 255));
         btnSo8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -760,7 +761,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo8MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 130, 100));
+        PanelDatban.add(btnSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 130, 100));
 
         btnSo9.setBackground(new java.awt.Color(255, 255, 255));
         btnSo9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -771,7 +772,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo9MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 130, 100));
+        PanelDatban.add(btnSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 130, 100));
 
         btnSo10.setBackground(new java.awt.Color(255, 255, 255));
         btnSo10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-table.png"))); // NOI18N
@@ -782,7 +783,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnSo10MouseClicked(evt);
             }
         });
-        PanelDatban.add(btnSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 130, 100));
+        PanelDatban.add(btnSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 130, 100));
 
         lbSo1.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo1.setText("Bàn Số 1");
@@ -790,19 +791,19 @@ public class HomeUser extends javax.swing.JFrame {
 
         lbSo2.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo2.setText("Bàn Số 2");
-        PanelDatban.add(lbSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 90, 30));
+        PanelDatban.add(lbSo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 90, 30));
 
         lbSo3.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo3.setText("Bàn Số 3");
-        PanelDatban.add(lbSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 90, 30));
+        PanelDatban.add(lbSo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 90, 30));
 
         lbSo4.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo4.setText("Bàn Số 4");
-        PanelDatban.add(lbSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 90, 30));
+        PanelDatban.add(lbSo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 90, 30));
 
         lbSo5.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo5.setText("Bàn Số 5");
-        PanelDatban.add(lbSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 90, 30));
+        PanelDatban.add(lbSo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 90, 30));
 
         lbSo6.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo6.setText("Bàn Số 6");
@@ -810,19 +811,19 @@ public class HomeUser extends javax.swing.JFrame {
 
         lbSo7.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo7.setText("Bàn Số 7");
-        PanelDatban.add(lbSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 90, 30));
+        PanelDatban.add(lbSo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 90, 30));
 
         lbSo8.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo8.setText("Bàn Số 8");
-        PanelDatban.add(lbSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 90, 30));
+        PanelDatban.add(lbSo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 90, 30));
 
         lbSo9.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo9.setText("Bàn Số 9");
-        PanelDatban.add(lbSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 90, 30));
+        PanelDatban.add(lbSo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 90, 30));
 
         lbSo10.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbSo10.setText("Bàn Số 10");
-        PanelDatban.add(lbSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 90, 30));
+        PanelDatban.add(lbSo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 90, 30));
 
         lbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
         lbBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -891,7 +892,10 @@ public class HomeUser extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        PanelFormDB.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
+        PanelFormDB.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, -1, -1));
+
+        btnDat.setText("Đặt");
+        PanelFormDB.add(btnDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
 
         Container.add(PanelFormDB, "card3");
 
@@ -1205,6 +1209,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnDailyCheck;
+    private javax.swing.JButton btnDat;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGuide;
     private javax.swing.JButton btnOrder;
