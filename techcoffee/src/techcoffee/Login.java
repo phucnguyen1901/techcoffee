@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
 
-    private String usernamelogin1;
     public String usernamee;
     /**
      * Creates new form Login
@@ -35,6 +34,7 @@ public class Login extends javax.swing.JFrame {
 
         
     }
+    
     //getuser name 
     public String getUser(){
         return usernamee;
@@ -169,7 +169,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qqq?useSSL=false", "root", "000001");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
                 pSm.setString(1, username.getText());
                 pSm.setString(2, passwd.getText());
@@ -195,57 +195,57 @@ public class Login extends javax.swing.JFrame {
 
     private void passwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String selected = jComboBox1.getSelectedItem().toString();
-            if (selected.equals("ADMIN")) {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
-                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
-                    pSm.setString(1, username.getText().toString());
-                    pSm.setString(2, passwd.getText().toString());
-                    pSm.setString(3, "1");
-                    ResultSet rs = pSm.executeQuery();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(null, "Login is success");
-                        HomeAdmin ha = new HomeAdmin();
-                        ha.setVisible(true);
-                        ha.pack();
-                        ha.setLocationRelativeTo(null);
-                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Login is not success");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Server error");
-                }
-
-            } else {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
-                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
-                    pSm.setString(1, username.getText());
-                    pSm.setString(2, passwd.getText());
-                    pSm.setString(3, "0");
-                    ResultSet rs = pSm.executeQuery();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(null, "Login is success");
-                        HomeUser hu = new HomeUser();
-                        hu.setVisible(true);
-                        hu.pack();
-                        hu.setLocationRelativeTo(null);
-                        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Login is not success");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Server error");
-                }
-            }
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            String selected = jComboBox1.getSelectedItem().toString();
+//            if (selected.equals("ADMIN")) {
+//                try {
+//                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+//                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+//                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+//                    pSm.setString(1, username.getText().toString());
+//                    pSm.setString(2, passwd.getText().toString());
+//                    pSm.setString(3, "1");
+//                    ResultSet rs = pSm.executeQuery();
+//                    if (rs.next()) {
+//                        JOptionPane.showMessageDialog(null, "Login is success");
+//                        HomeAdmin ha = new HomeAdmin();
+//                        ha.setVisible(true);
+//                        ha.pack();
+//                        ha.setLocationRelativeTo(null);
+//                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                        this.dispose();
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Login is not success");
+//                    }
+//                } catch (Exception e) {
+//                    JOptionPane.showMessageDialog(null, "Server error");
+//                }
+//
+//            } else {
+//                try {
+//                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+//                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
+//                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
+//                    pSm.setString(1, username.getText());
+//                    pSm.setString(2, passwd.getText());
+//                    pSm.setString(3, "0");
+//                    ResultSet rs = pSm.executeQuery();
+//                    if (rs.next()) {
+//                        JOptionPane.showMessageDialog(null, "Login is success");
+//                        HomeUser hu = new HomeUser();
+//                        hu.setVisible(true);
+//                        hu.pack();
+//                        hu.setLocationRelativeTo(null);
+//                        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                        this.dispose();
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Login is not success");
+//                    }
+//                } catch (Exception e) {
+//                    JOptionPane.showMessageDialog(null, "Server error");
+//                }
+//            }
+//        }
     }//GEN-LAST:event_passwdKeyPressed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
