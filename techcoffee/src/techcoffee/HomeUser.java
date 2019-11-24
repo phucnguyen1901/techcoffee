@@ -207,8 +207,6 @@ public class HomeUser extends javax.swing.JFrame {
   
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        Login login = new Login();
-        lbNameuser.setText(login.getUser());
     }
 
     /**
@@ -260,8 +258,7 @@ public class HomeUser extends javax.swing.JFrame {
         btnContact = new javax.swing.JButton();
         lbContact = new javax.swing.JLabel();
         lbWelcome = new javax.swing.JLabel();
-        lbOrder3 = new javax.swing.JLabel();
-        lbOrder2 = new javax.swing.JLabel();
+        lbNameuser1 = new javax.swing.JLabel();
         lbWelcome1 = new javax.swing.JLabel();
         PanelDatban = new javax.swing.JPanel();
         btnSo1 = new javax.swing.JButton();
@@ -668,13 +665,9 @@ public class HomeUser extends javax.swing.JFrame {
         lbWelcome.setText("Tôtô xin chúc quý khách có một ngày vui vẻ !");
         PanelHome.add(lbWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 500, 30));
 
-        lbOrder3.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
-        lbOrder3.setText("NameUser,");
-        PanelHome.add(lbOrder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 110, 30));
-
-        lbOrder2.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
-        lbOrder2.setText("Xin Chào");
-        PanelHome.add(lbOrder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 90, 30));
+        lbNameuser1.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
+        lbNameuser1.setText("NameUser");
+        PanelHome.add(lbNameuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 200, 30));
 
         lbWelcome1.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
         lbWelcome1.setText("TechCoffe hân hạnh được phục vụ quý khách !");
@@ -1298,10 +1291,9 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbDailyCheckin;
     private javax.swing.JLabel lbDay;
     private javax.swing.JLabel lbHDSD;
-    private javax.swing.JLabel lbNameuser;
+    public static javax.swing.JLabel lbNameuser;
+    public static javax.swing.JLabel lbNameuser1;
     private javax.swing.JLabel lbOrder;
-    private javax.swing.JLabel lbOrder2;
-    private javax.swing.JLabel lbOrder3;
     private javax.swing.JLabel lbSo1;
     private javax.swing.JLabel lbSo10;
     private javax.swing.JLabel lbSo2;

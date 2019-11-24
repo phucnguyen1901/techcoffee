@@ -26,7 +26,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //for getusern
-        usernamee= username.getText().toString();
+        
         //        if (rmbpasswd.isSelected()) {
         //            username.setText(username.getText().toString());
         //            passwd.setText(passwd.getText().toString());
@@ -36,9 +36,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     //getuser name 
-    public String getUser(){
-        return usernamee;
-    }
+   
     
 
     /**
@@ -142,14 +140,14 @@ public class Login extends javax.swing.JFrame {
         String selected = jComboBox1.getSelectedItem().toString();
         if (selected.equals("ADMIN")) {
             try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qqq?useSSL=false", "root", "000001");
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
                 pSm.setString(3, "1");
                 ResultSet rs = pSm.executeQuery();
-              
+                usernamee= username.getText().toString();
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(null, "Login is success");
                     HomeAdmin ha = new HomeAdmin();
@@ -166,18 +164,20 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Server error");
             }
 
-        } else {
+        } else  {
             try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qqq?useSSL=false", "root", "000001");
-                PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
-                pSm.setString(1, username.getText());
-                pSm.setString(2, passwd.getText());
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
+                PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+                pSm.setString(1, username.getText().toString());
+                pSm.setString(2, passwd.getText().toString());
                 pSm.setString(3, "0");
                 ResultSet rs = pSm.executeQuery();
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(null, "Login is success");
                     HomeUser hu = new HomeUser();
+                    hu.lbNameuser.setText(this.username.getText().toString());
+                    hu.lbNameuser1.setText("Xin chào "+this.username.getText().toString()+",");
                     hu.setVisible(true);
                     hu.pack();
                     hu.setLocationRelativeTo(null);
@@ -188,6 +188,7 @@ public class Login extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Server error");
+                System.out.println("SQL exception: "+e.getMessage());
             }
         }
 
