@@ -23,8 +23,25 @@ public class HomeAdmin extends javax.swing.JFrame {
      */
     public HomeAdmin() {
         initComponents();
+        connectDB();
         jLayeredMain.removeAll();
 
+    }
+
+    Connection conn;
+    PreparedStatement pSm;
+    ResultSet rs;
+
+    public void connectDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+            pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+            System.out.print("Connect is success");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Server error");
+        }
     }
 
     /**
@@ -858,7 +875,7 @@ public class HomeAdmin extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID USER", "Họ tên", "feelback"
+                "ID USER", "USERNAME", "feelback"
             }
         ));
         jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1043,10 +1060,8 @@ public class HomeAdmin extends javax.swing.JFrame {
     private void btnHienthiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienthiActionPerformed
         switchPanel(jPanelHienThi);
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareStatement("SELECT * from employee");
-            ResultSet rs = pSm.executeQuery();
+            pSm = conn.prepareStatement("SELECT * from employee");
+            rs = pSm.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
@@ -1097,9 +1112,7 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btnXacnhanThemNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacnhanThemNVMouseClicked
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareStatement("call add_employee(?,?,?,?,?,?)");
+            pSm = conn.prepareStatement("call add_employee(?,?,?,?,?,?)");
             pSm.setString(1, getID.getText());
             pSm.setString(2, getHoten.getText());
             pSm.setString(3, getsdt.getText());
@@ -1136,9 +1149,8 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btnXacNhanCapnhatNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanCapnhatNVMouseClicked
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareCall("call update_employee(?,?,?,?,?,?,?)");
+
+            pSm = conn.prepareCall("call update_employee(?,?,?,?,?,?,?)");
             if (setIDNew.getText().isEmpty()) {
                 setIDNew.setText(setID.getText());
             }
@@ -1165,9 +1177,8 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btnXacNhanCapnhatNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanCapnhatNV1MouseClicked
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareCall("call delete_employee(?)");
+
+            pSm = conn.prepareCall("call delete_employee(?)");
             pSm.setString(1, setIDXoa.getText());
 
             if (!setIDXoa.getText().isEmpty()) {
@@ -1187,10 +1198,9 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btndelete_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndelete_historyMouseClicked
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareStatement("SELECT * from save_delete");
-            ResultSet rs = pSm.executeQuery();
+
+            pSm = conn.prepareStatement("SELECT * from save_delete");
+            rs = pSm.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) jTable2.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
@@ -1208,10 +1218,9 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btnadd_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnadd_historyMouseClicked
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareStatement("SELECT * from save_add");
-            ResultSet rs = pSm.executeQuery();
+
+            pSm = conn.prepareStatement("SELECT * from save_add");
+            rs = pSm.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) jTable2.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
@@ -1243,10 +1252,9 @@ public class HomeAdmin extends javax.swing.JFrame {
     private void btnfeelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfeelbackMouseClicked
         switchPanel(jPanelfeelback);
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?useSSL=false", "root", "H_Ghost");
-            PreparedStatement pSm = conn.prepareStatement("SELECT * from users");
-            ResultSet rs = pSm.executeQuery();
+
+            pSm = conn.prepareStatement("SELECT * from users");
+            rs = pSm.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) jTable3.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
