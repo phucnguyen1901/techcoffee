@@ -32,9 +32,13 @@ public class HomeUser extends javax.swing.JFrame {
     /**
      * Creates new form HomeUser
      */
-    public String usernamesession;
+    private String usernamesession;
     String bann;
     int soban;
+    public void getUser(String temp){
+        this.usernamesession=temp;
+    }
+    
     public void clock(){
         
         Thread clock=new Thread(){
@@ -148,7 +152,7 @@ public class HomeUser extends javax.swing.JFrame {
         return xuat;
         
     }
-    void update_label(){
+    private void update_label(){
         for(int i=1;i<=10;i++){
             String temp="So"+i;
             if(getStatus(temp)==3){
@@ -200,7 +204,7 @@ public class HomeUser extends javax.swing.JFrame {
                  
         }
     }
-    void dangDat(String ban){
+    private void dangDat(String ban){
         CallableStatement cStmt = null; 
         ResultSet rs =null;
         try{
@@ -225,7 +229,7 @@ public class HomeUser extends javax.swing.JFrame {
             }
         }
     }
-    void dungXong(String ban){
+    private void dungXong(String ban){
         CallableStatement cStmt = null; 
         ResultSet rs =null;
         try{
@@ -250,13 +254,46 @@ public class HomeUser extends javax.swing.JFrame {
             }
         }
     }
+    private void datXong(String ban){
+        CallableStatement cStmt = null; 
+        ResultSet rs =null;
+        PreparedStatement pSm= null;
+        try{
+        cStmt = conn.prepareCall("{call datXong(?)}"); 
+        cStmt.setString(1, ban); 
+        rs = cStmt.executeQuery();
+        pSm = conn.prepareStatement("insert into datBan(soBan,userName,soNguoi,timeDatban,yeuCau) values(?,?,?,?,?)");
+//        pSm.setString(1, getID.getText());
+//        pSm.setString(2, getHoten.getText());
+//        pSm.setString(3, getsdt.getText());
+//        pSm.setString(4, getMucLuong.getText());
+//        pSm.setString(5, getNgayVaolam.getText());
+        pSm.executeUpdate();
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(cStmt!= null){
+                try{
+                    cStmt.close();
+                }catch(SQLException sqlEx){}
+                cStmt=null;
+            }
+        }
+    }
     
     public HomeUser() {
         initComponents();
         clock();
         ConnectDatabase();
-        
-  
+        usernamesession="";
+       
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
@@ -975,6 +1012,11 @@ public class HomeUser extends javax.swing.JFrame {
         PanelFormDB.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, -1, -1));
 
         btnDat.setText("Đặt");
+        btnDat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDatMouseClicked(evt);
+            }
+        });
         PanelFormDB.add(btnDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1069,6 +1111,7 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         switchPanel(PanelDatban);
         update_label();
+        System.out.println(usernamesession);
     }//GEN-LAST:event_btnOrderMouseClicked
 
     private void btnBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseClicked
@@ -1301,6 +1344,12 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         update_label();
     }//GEN-LAST:event_btnRefeshMouseClicked
+
+    private void btnDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMouseClicked
+        // TODO add your handling code here:
+        datXong(bann);
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_btnDatMouseClicked
 
     /**
      * @param args the command line arguments

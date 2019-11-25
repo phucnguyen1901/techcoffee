@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
 
-    public String usernamee;
+    public static String usernamee;
     /**
      * Creates new form Login
      */
@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
                     HomeUser hu = new HomeUser();
                     hu.lbNameuser.setText(this.username.getText().toString());
                     hu.lbNameuser1.setText("Xin chào "+this.username.getText().toString()+",");
-                    hu.usernamesession=this.username.getText().toString();
+                    hu.getUser(this.username.getText().toString());
                     hu.setVisible(true);
                     hu.pack();
                     hu.setLocationRelativeTo(null);
