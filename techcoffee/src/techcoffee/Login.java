@@ -9,7 +9,6 @@ package techcoffee;
  *
  * @author kobao
  */
-
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JFrame;
@@ -19,6 +18,7 @@ import javax.swing.JTextField;
 public class Login extends javax.swing.JFrame {
 
     public static String usernamee;
+
     /**
      * Creates new form Login
      */
@@ -26,19 +26,14 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //for getusern
-        
+
         //        if (rmbpasswd.isSelected()) {
         //            username.setText(username.getText().toString());
         //            passwd.setText(passwd.getText().toString());
         //        }
-
-        
     }
-    
-    //getuser name 
-   
-    
 
+    //getuser name 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,13 +136,13 @@ public class Login extends javax.swing.JFrame {
         if (selected.equals("ADMIN")) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
                 pSm.setString(3, "1");
                 ResultSet rs = pSm.executeQuery();
-                usernamee= username.getText().toString();
+                usernamee = username.getText().toString();
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(null, "Login is success");
                     HomeAdmin ha = new HomeAdmin();
@@ -164,10 +159,10 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Server error");
             }
 
-        } else  {
+        } else {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/democafe?"+"user=root&password=H_Ghost");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
@@ -177,7 +172,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login is success");
                     HomeUser hu = new HomeUser();
                     hu.lbNameuser.setText(this.username.getText().toString());
-                    hu.lbNameuser1.setText("Xin chào "+this.username.getText().toString()+",");
+                    hu.lbNameuser1.setText("Xin chào " + this.username.getText().toString() + ",");
                     hu.getUser(this.username.getText().toString());
                     hu.setVisible(true);
                     hu.pack();
@@ -189,65 +184,71 @@ public class Login extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Server error");
-                System.out.println("SQL exception: "+e.getMessage());
+                System.out.println("SQL exception: " + e.getMessage());
             }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String selected = jComboBox1.getSelectedItem().toString();
+            if (selected.equals("ADMIN")) {
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                    PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+                    pSm.setString(1, username.getText().toString());
+                    pSm.setString(2, passwd.getText().toString());
+                    pSm.setString(3, "1");
+                    ResultSet rs = pSm.executeQuery();
+                    usernamee = username.getText().toString();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Login is success");
+                        HomeAdmin ha = new HomeAdmin();
+                        ha.usernamelogin.setText(this.username.getText().toString());
+                        ha.setVisible(true);
+                        ha.pack();
+                        ha.setLocationRelativeTo(null);
+                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login is not success");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Server error");
+                }
 
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            String selected = jComboBox1.getSelectedItem().toString();
-//            if (selected.equals("ADMIN")) {
-//                try {
-//                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-//                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
-//                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
-//                    pSm.setString(1, username.getText().toString());
-//                    pSm.setString(2, passwd.getText().toString());
-//                    pSm.setString(3, "1");
-//                    ResultSet rs = pSm.executeQuery();
-//                    if (rs.next()) {
-//                        JOptionPane.showMessageDialog(null, "Login is success");
-//                        HomeAdmin ha = new HomeAdmin();
-//                        ha.setVisible(true);
-//                        ha.pack();
-//                        ha.setLocationRelativeTo(null);
-//                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                        this.dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Login is not success");
-//                    }
-//                } catch (Exception e) {
-//                    JOptionPane.showMessageDialog(null, "Server error");
-//                }
-//
-//            } else {
-//                try {
-//                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-//                    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qliquancafe?useSSL=false", "root", "000001");
-//                    PreparedStatement pSm = conn.prepareCall("SELECT * from login where _username=? and _passwd=? and check_admin=?");
-//                    pSm.setString(1, username.getText());
-//                    pSm.setString(2, passwd.getText());
-//                    pSm.setString(3, "0");
-//                    ResultSet rs = pSm.executeQuery();
-//                    if (rs.next()) {
-//                        JOptionPane.showMessageDialog(null, "Login is success");
-//                        HomeUser hu = new HomeUser();
-//                        hu.setVisible(true);
-//                        hu.pack();
-//                        hu.setLocationRelativeTo(null);
-//                        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                        this.dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Login is not success");
-//                    }
-//                } catch (Exception e) {
-//                    JOptionPane.showMessageDialog(null, "Server error");
-//                }
-//            }
-//        }
+            } else {
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                    PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+                    pSm.setString(1, username.getText().toString());
+                    pSm.setString(2, passwd.getText().toString());
+                    pSm.setString(3, "0");
+                    ResultSet rs = pSm.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Login is success");
+                        HomeUser hu = new HomeUser();
+                        hu.lbNameuser.setText(this.username.getText().toString());
+                        hu.lbNameuser1.setText("Xin chào " + this.username.getText().toString() + ",");
+                        hu.getUser(this.username.getText().toString());
+                        hu.setVisible(true);
+                        hu.pack();
+                        hu.setLocationRelativeTo(null);
+                        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login is not success");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Server error");
+                    System.out.println("SQL exception: " + e.getMessage());
+                }
+            }
+        }
+
     }//GEN-LAST:event_passwdKeyPressed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
