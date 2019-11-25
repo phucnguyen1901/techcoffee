@@ -136,7 +136,7 @@ public class Login extends javax.swing.JFrame {
         if (selected.equals("ADMIN")) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
@@ -162,7 +162,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
                 PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
@@ -196,7 +196,7 @@ public class Login extends javax.swing.JFrame {
             if (selected.equals("ADMIN")) {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
                     PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                     pSm.setString(1, username.getText().toString());
                     pSm.setString(2, passwd.getText().toString());
@@ -222,7 +222,7 @@ public class Login extends javax.swing.JFrame {
             } else {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
                     PreparedStatement pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                     pSm.setString(1, username.getText().toString());
                     pSm.setString(2, passwd.getText().toString());

@@ -114,7 +114,7 @@ public class HomeUser extends javax.swing.JFrame {
         try{
             
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=000001");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=H_Ghost");
             System.out.println("Sucess");   
             
         }catch(Exception ex){
@@ -396,6 +396,7 @@ public class HomeUser extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         lbTitle = new javax.swing.JLabel();
+        PanelHistory = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1056,6 +1057,10 @@ public class HomeUser extends javax.swing.JFrame {
 
         Container.add(PanelFormDB, "card3");
 
+        PanelHistory.setBackground(new java.awt.Color(255, 255, 255));
+        PanelHistory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Container.add(PanelHistory, "card3");
+
         getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
 
         pack();
@@ -1066,6 +1071,7 @@ public class HomeUser extends javax.swing.JFrame {
         setColor(btn_4);
         ind_4.setOpaque(true);
         resetColor(new JPanel[]{btn_2,btn_3,btn_5},new JPanel[]{ind_2,ind_3,ind_5});
+        switchPanel(PanelHistory);
     }//GEN-LAST:event_btn_4MousePressed
 
     private void btn_5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_5MousePressed
@@ -1087,6 +1093,7 @@ public class HomeUser extends javax.swing.JFrame {
         setColor(btn_2);
         ind_2.setOpaque(true);
         resetColor(new JPanel[]{btn_4,btn_3,btn_5},new JPanel[]{ind_4,ind_3,ind_5});
+        switchPanel(PanelHome);
     }//GEN-LAST:event_btn_2MousePressed
 
     //Drag window 
@@ -1116,7 +1123,6 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         switchPanel(PanelDatban);
         update_label();
-        System.out.println(usernamesession);
     }//GEN-LAST:event_btnOrderMouseClicked
 
     private void btnBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseClicked
@@ -1425,6 +1431,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel Container;
     private javax.swing.JPanel PanelDatban;
     private javax.swing.JPanel PanelFormDB;
+    private javax.swing.JPanel PanelHistory;
     private javax.swing.JPanel PanelHome;
     private javax.swing.JPanel PanelHuongdan;
     private javax.swing.JPanel PanelLienhe;
