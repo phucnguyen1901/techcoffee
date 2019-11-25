@@ -33,8 +33,10 @@ public class HomeUser extends javax.swing.JFrame {
      * Creates new form HomeUser
      */
     private String usernamesession;
+    int tempForm=0;
     String bann;
     int soban;
+    int hour,minute;
     public void getUser(String temp){
         this.usernamesession=temp;
     }
@@ -52,8 +54,8 @@ public class HomeUser extends javax.swing.JFrame {
                         int year=call.get(Calendar.YEAR);
                         int year1=call.get(Calendar.AM_PM);//Test sau 
                         int second=call.get(Calendar.SECOND);
-                        int minute=call.get(Calendar.MINUTE);
-                        int hour=call.get(Calendar.HOUR_OF_DAY);
+                        minute=call.get(Calendar.MINUTE);
+                        hour=call.get(Calendar.HOUR_OF_DAY);
                         if(thu==1)
                             lbThu.setText("Chủ Nhật");
                         else
@@ -263,11 +265,12 @@ public class HomeUser extends javax.swing.JFrame {
         cStmt.setString(1, ban); 
         rs = cStmt.executeQuery();
         pSm = conn.prepareStatement("insert into datBan(soBan,userName,soNguoi,timeDatban,yeuCau) values(?,?,?,?,?)");
-//        pSm.setString(1, getID.getText());
-//        pSm.setString(2, getHoten.getText());
-//        pSm.setString(3, getsdt.getText());
-//        pSm.setString(4, getMucLuong.getText());
-//        pSm.setString(5, getNgayVaolam.getText());
+        pSm.setString(1, bann);
+        pSm.setString(2, usernamesession);
+        pSm.setString(3, cbxBanNguoi.getSelectedItem().toString());
+        String timedat=cbxTimeDat.getSelectedItem().toString()+" kể từ "+hour+":"+minute;
+        pSm.setString(4,timedat );
+        pSm.setString(5, jTextArea1.getText().toString());
         pSm.executeUpdate();
         }catch(Exception ex){
             System.out.println("SQL exception: "+ex.getMessage());
@@ -1103,7 +1106,9 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
-        dungXong(bann);
+        //Khi o trong form dat ban ma thoat ra
+        if(tempForm==1)
+            dungXong(bann);
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
@@ -1158,6 +1163,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo10MouseClicked
 
@@ -1175,6 +1181,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo9MouseClicked
 
@@ -1192,6 +1199,8 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
+        
         }
     }//GEN-LAST:event_btnSo8MouseClicked
 
@@ -1209,6 +1218,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo7MouseClicked
 
@@ -1226,6 +1236,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo6MouseClicked
 
@@ -1243,6 +1254,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo5MouseClicked
 
@@ -1260,6 +1272,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo4MouseClicked
 
@@ -1277,6 +1290,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo3MouseClicked
 
@@ -1295,6 +1309,7 @@ public class HomeUser extends javax.swing.JFrame {
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
     }//GEN-LAST:event_btnSo2MouseClicked
 
@@ -1306,10 +1321,14 @@ public class HomeUser extends javax.swing.JFrame {
         temp=getStatus(bann);
         if(temp==2)
             JOptionPane.showMessageDialog(this,"Bàn đang được người khác đặt");
+        else if(temp==3){
+            JOptionPane.showMessageDialog(this,"Bàn đã được người khác đặt");
+        }
         else{
         dangDat(bann);
         switchPanel(PanelFormDB);
         lbTitle.setText("Bàn "+bann);
+        tempForm=1;
         }
         
 //        int temp;
@@ -1335,6 +1354,7 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        tempForm=0;
         dungXong(bann);
         switchPanel(PanelDatban);
 
@@ -1347,6 +1367,7 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void btnDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMouseClicked
         // TODO add your handling code here:
+        tempForm=0;
         datXong(bann);
         switchPanel(PanelHome);
     }//GEN-LAST:event_btnDatMouseClicked
