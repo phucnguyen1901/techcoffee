@@ -178,6 +178,7 @@ public class Login extends javax.swing.JFrame {
                     HomeUser hu = new HomeUser();
                     hu.lbNameuser.setText(this.username.getText().toString());
                     hu.lbNameuser1.setText("Xin chào "+this.username.getText().toString()+",");
+                    hu.usernamesession=this.username.getText().toString();
                     hu.setVisible(true);
                     hu.pack();
                     hu.setLocationRelativeTo(null);
