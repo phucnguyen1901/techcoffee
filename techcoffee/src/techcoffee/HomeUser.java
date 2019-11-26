@@ -114,12 +114,10 @@ public class HomeUser extends javax.swing.JFrame {
         try{
             
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=H_Ghost");
-            System.out.println("Sucess");   
-            
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=H_Ghost");     
         }catch(Exception ex){
             System.out.println("That Bai");
-            ex.printStackTrace();
+            System.out.println("SQL exception: "+ex.getMessage());
         }
     }
     public int getStatus(String ban){
@@ -287,6 +285,12 @@ public class HomeUser extends javax.swing.JFrame {
                     cStmt.close();
                 }catch(SQLException sqlEx){}
                 cStmt=null;
+            }
+            if(pSm!= null){
+                try{
+                    pSm.close();
+                }catch(SQLException sqlEx){}
+                pSm=null;
             }
         }
     }

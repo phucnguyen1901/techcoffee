@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
@@ -32,10 +33,17 @@ public class Login extends javax.swing.JFrame {
    Connection conn;
    PreparedStatement pSm;
    ResultSet rs;
+   public void switchPanel(JPanel panel){
+        Container.removeAll();
+        Container.add(panel);
+        Container.repaint();
+        Container.revalidate();
+    
+    }
    public void connectDB(){
          try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
                 System.out.print("Connect is success");
                 
             } catch (Exception e) {
@@ -53,7 +61,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Container = new javax.swing.JPanel();
+        Panellogin = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
@@ -63,18 +72,31 @@ public class Login extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        Panelsignup = new javax.swing.JPanel();
+        lbUsernameSignup = new javax.swing.JTextField();
+        lbPassSignup2 = new javax.swing.JPasswordField();
+        lbPassSignup = new javax.swing.JPasswordField();
+        btnSignup = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Container.setLayout(new java.awt.CardLayout());
+
+        Panellogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-user-login .png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        Panellogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-lock -login.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        Panellogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         username.setBackground(new java.awt.Color(255, 204, 102));
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +104,7 @@ public class Login extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 180, 30));
+        Panellogin.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 180, 30));
 
         passwd.setBackground(new java.awt.Color(255, 204, 102));
         passwd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -90,7 +112,7 @@ public class Login extends javax.swing.JFrame {
                 passwdKeyPressed(evt);
             }
         });
-        jPanel1.add(passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 30));
+        Panellogin.add(passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/log-in.png"))); // NOI18N
@@ -99,7 +121,7 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 50, -1));
+        Panellogin.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 50, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 51));
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -110,11 +132,11 @@ public class Login extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 350, 40));
+        Panellogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 350, 40));
 
         jComboBox1.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "USER", "ADMIN" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 30));
+        Panellogin.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 153, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -125,13 +147,94 @@ public class Login extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, -1));
+        Panellogin.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/background_login1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
+        Panellogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        Container.add(Panellogin, "card3");
+
+        Panelsignup.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbUsernameSignup.setBackground(new java.awt.Color(255, 204, 102));
+        lbUsernameSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lbUsernameSignupActionPerformed(evt);
+            }
+        });
+        Panelsignup.add(lbUsernameSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 180, 30));
+
+        lbPassSignup2.setBackground(new java.awt.Color(255, 204, 102));
+        lbPassSignup2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbPassSignup2KeyPressed(evt);
+            }
+        });
+        Panelsignup.add(lbPassSignup2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 180, 30));
+
+        lbPassSignup.setBackground(new java.awt.Color(255, 204, 102));
+        lbPassSignup.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbPassSignupKeyPressed(evt);
+            }
+        });
+        Panelsignup.add(lbPassSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 180, 30));
+
+        btnSignup.setBackground(new java.awt.Color(255, 153, 0));
+        btnSignup.setText("Sign Up");
+        btnSignup.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignupMouseClicked(evt);
+            }
+        });
+        Panelsignup.add(btnSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 80, 30));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Nhập Lại Mật Khẩu :");
+        Panelsignup.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 140, 30));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Mật Khẩu  :");
+        Panelsignup.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 80, 30));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Tên Tài Khoản : ");
+        Panelsignup.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, 30));
+
+        jLabel8.setBackground(new java.awt.Color(255, 153, 51));
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel8.setText("Click here go to login !");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        Panelsignup.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 250, 40));
+
+        jLabel9.setBackground(new java.awt.Color(255, 153, 51));
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel9.setText("X");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        Panelsignup.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/background_login1.jpg"))); // NOI18N
+        jLabel10.setText("jLabel1");
+        Panelsignup.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
+
+        Container.add(Panelsignup, "card3");
+
+        getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,17 +359,124 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwdKeyPressed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        HomeUser hu = new HomeUser();
-        hu.setVisible(true);
-        hu.pack();
-        hu.setLocationRelativeTo(null);
-        hu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        switchPanel(Panelsignup);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
+
+    private void lbUsernameSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbUsernameSignupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbUsernameSignupActionPerformed
+
+    private void lbPassSignup2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbPassSignup2KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                if(lbUsernameSignup.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+            }else if(lbPassSignup.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+            }else if(lbPassSignup2.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+            }else if(!lbPassSignup2.getText().equals(lbPassSignup.getText())){
+                JOptionPane.showMessageDialog(this,"2 mật khẩu phải giống nhau");
+            }else if(lbUsernameSignup.getText().length()>=16){
+                JOptionPane.showMessageDialog(this,"Tên tài khoản phải nhỏ hơn 16 kí tự");
+            }else if(lbPassSignup.getText().length()<3){
+                JOptionPane.showMessageDialog(this,"Mật khẩu phải nhiều hơn 3 kí tự");
+            }else{
+                PreparedStatement pSm= null;
+                try{
+                    pSm = conn.prepareStatement("insert into users(username,passwd) values(?,?)");
+                    pSm.setString(1,lbUsernameSignup.getText().toString());
+                    pSm.setString(2, lbPassSignup.getText().toString());
+                    pSm.executeUpdate();
+                    JOptionPane.showMessageDialog(this,"Đăng ký thành công");
+                    HomeUser homeuser = new HomeUser();
+                    homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
+                    homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
+                    homeuser.getUser(this.lbUsernameSignup.getText().toString());
+                    homeuser.setVisible(true);
+                    homeuser.pack();
+                    homeuser.setLocationRelativeTo(null);
+                    homeuser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(this,"Tên tài khoản đã có người đăng ký");
+                }finally{
+                    //Giai phong
+                    if(pSm!= null){
+                        try{
+                            pSm.close();
+                        }catch(SQLException sqlEx){}
+                        pSm=null;
+                    }
+                }
+
+            }
+        }
+    }//GEN-LAST:event_lbPassSignup2KeyPressed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        switchPanel(Panellogin);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void lbPassSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbPassSignupKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbPassSignupKeyPressed
+
+    private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignupMouseClicked
+        // TODO add your handling code here:
+        if(lbUsernameSignup.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+        }else if(lbPassSignup.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+        }else if(lbPassSignup2.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+        }else if(!lbPassSignup2.getText().equals(lbPassSignup.getText())){
+            JOptionPane.showMessageDialog(this,"2 mật khẩu phải giống nhau");
+        }else if(lbUsernameSignup.getText().length()>=16){
+            JOptionPane.showMessageDialog(this,"Tên tài khoản phải nhỏ hơn 16 kí tự");
+        }else if(lbPassSignup.getText().length()<3){
+            JOptionPane.showMessageDialog(this,"Mật khẩu phải nhiều hơn 3 kí tự");
+        }else{
+            PreparedStatement pSm= null;
+            try{
+                pSm = conn.prepareStatement("insert into users(username,passwd) values(?,?)");
+                pSm.setString(1,lbUsernameSignup.getText().toString());
+                pSm.setString(2, lbPassSignup.getText().toString());
+                pSm.executeUpdate();
+                JOptionPane.showMessageDialog(this,"Đăng ký thành công");
+                HomeUser homeuser = new HomeUser();
+                homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
+                homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
+                homeuser.getUser(this.lbUsernameSignup.getText().toString());
+                homeuser.setVisible(true);
+                homeuser.pack();
+                homeuser.setLocationRelativeTo(null);
+                homeuser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(this,"Tên tài khoản đã có người đăng ký");
+            }finally{
+                //Giai phong
+                if(pSm!= null){
+                    try{
+                        pSm.close();
+                    }catch(SQLException sqlEx){}
+                    pSm=null;
+                }
+            }
+        
+        }
+    }//GEN-LAST:event_btnSignupMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,14 +514,26 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Container;
+    private javax.swing.JPanel Panellogin;
+    private javax.swing.JPanel Panelsignup;
+    private javax.swing.JButton btnSignup;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPasswordField lbPassSignup;
+    private javax.swing.JPasswordField lbPassSignup2;
+    private javax.swing.JTextField lbUsernameSignup;
     private javax.swing.JPasswordField passwd;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
