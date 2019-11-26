@@ -8,6 +8,7 @@ package techcoffee;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.sql.CallableStatement;
@@ -19,9 +20,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -36,7 +41,7 @@ public class HomeUser extends javax.swing.JFrame {
     int tempForm=0;
     String bann;
     int soban;
-    int hour,minute;
+    int hour,minute,day,month,year;
     public void getUser(String temp){
         this.usernamesession=temp;
     }
@@ -49,9 +54,9 @@ public class HomeUser extends javax.swing.JFrame {
                    for(;;){
                         Calendar call =new GregorianCalendar();
                         int thu=call.get(Calendar.DAY_OF_WEEK);
-                        int day=call.get(Calendar.DAY_OF_MONTH);
-                        int month=call.get(Calendar.MONTH)+1;
-                        int year=call.get(Calendar.YEAR);
+                        day=call.get(Calendar.DAY_OF_MONTH);
+                        month=call.get(Calendar.MONTH)+1;
+                        year=call.get(Calendar.YEAR);
                         int year1=call.get(Calendar.AM_PM);//Test sau 
                         int second=call.get(Calendar.SECOND);
                         minute=call.get(Calendar.MINUTE);
@@ -119,6 +124,46 @@ public class HomeUser extends javax.swing.JFrame {
             System.out.println("That Bai");
             System.out.println("SQL exception: "+ex.getMessage());
         }
+    }
+    public void setTichDiem(String user1){
+        String tempTD;
+        if(getTichDiem(user1)==15){
+            tempTD="14/14";
+        }else{
+            tempTD=getTichDiem(user1)+"/14";}
+        lbTichDiem.setText(tempTD);
+    }
+    public int getTichDiem(String userTD){
+        int xuat=0;
+        PreparedStatement pStmt=null;
+        ResultSet rs =null;
+        
+        try{
+            pStmt = conn.prepareStatement("select xuatTichDiem(?)");
+            pStmt.setString(1, userTD);
+            rs=pStmt.executeQuery();
+            while(rs.next()){
+               xuat=rs.getInt(1); 
+            }
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(pStmt!= null){
+                try{
+                    pStmt.close();
+                }catch(SQLException sqlEx){}
+                pStmt=null;
+            }
+        }
+        return xuat;
+        
     }
     public int getStatus(String ban){
         int xuat=0;
@@ -204,6 +249,7 @@ public class HomeUser extends javax.swing.JFrame {
                  
         }
     }
+    
     private void dangDat(String ban){
         CallableStatement cStmt = null; 
         ResultSet rs =null;
@@ -295,6 +341,7 @@ public class HomeUser extends javax.swing.JFrame {
         }
     }
     
+    
     public HomeUser() {
         initComponents();
         clock();
@@ -303,6 +350,7 @@ public class HomeUser extends javax.swing.JFrame {
        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
     }
 
     /**
@@ -324,9 +372,6 @@ public class HomeUser extends javax.swing.JFrame {
         btn_5 = new javax.swing.JPanel();
         ind_5 = new javax.swing.JPanel();
         lbThu5 = new javax.swing.JLabel();
-        btn_3 = new javax.swing.JPanel();
-        ind_3 = new javax.swing.JPanel();
-        lbThu3 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -334,8 +379,9 @@ public class HomeUser extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbNhanTichDiem = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lbTichDiem = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lbNameuser = new javax.swing.JLabel();
@@ -345,12 +391,10 @@ public class HomeUser extends javax.swing.JFrame {
         Container = new javax.swing.JPanel();
         PanelHome = new javax.swing.JPanel();
         btnOrder = new javax.swing.JButton();
-        btnGuide = new javax.swing.JButton();
         lbStaff = new javax.swing.JLabel();
         btnDailyCheck = new javax.swing.JButton();
         lbOrder = new javax.swing.JLabel();
         lbDailyCheckin = new javax.swing.JLabel();
-        lbHDSD = new javax.swing.JLabel();
         btnContact = new javax.swing.JButton();
         lbContact = new javax.swing.JLabel();
         lbWelcome = new javax.swing.JLabel();
@@ -382,12 +426,14 @@ public class HomeUser extends javax.swing.JFrame {
         lbWelcome2 = new javax.swing.JLabel();
         btnRefesh = new javax.swing.JButton();
         lbWelcome4 = new javax.swing.JLabel();
-        PanelTichdiem = new javax.swing.JPanel();
-        btnBack1 = new javax.swing.JButton();
-        PanelHuongdan = new javax.swing.JPanel();
-        btnBack2 = new javax.swing.JButton();
         PanelLienhe = new javax.swing.JPanel();
-        btnBack3 = new javax.swing.JButton();
+        lbBack1 = new javax.swing.JLabel();
+        lbStaff2 = new javax.swing.JLabel();
+        lbWelcome7 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tAPhanHoi = new javax.swing.JTextArea();
+        btnPhanHoi = new javax.swing.JButton();
         PanelFormDB = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnDat = new javax.swing.JButton();
@@ -401,6 +447,17 @@ public class HomeUser extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         lbTitle = new javax.swing.JLabel();
         PanelHistory = new javax.swing.JPanel();
+        PanelProfile = new javax.swing.JPanel();
+        lbStaff1 = new javax.swing.JLabel();
+        lbNameuser2 = new javax.swing.JLabel();
+        lbWelcome5 = new javax.swing.JLabel();
+        lbWelcome6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lbNameuser3 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lbPasswordprofile = new javax.swing.JLabel();
+        btnShowpass = new javax.swing.JButton();
+        btnChangePass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -512,37 +569,6 @@ public class HomeUser extends javax.swing.JFrame {
 
         topPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 110, 50));
 
-        btn_3.setBackground(new java.awt.Color(32, 90, 180));
-        btn_3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_3MousePressed(evt);
-            }
-        });
-        btn_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ind_3.setOpaque(false);
-        ind_3.setPreferredSize(new java.awt.Dimension(3, 42));
-
-        javax.swing.GroupLayout ind_3Layout = new javax.swing.GroupLayout(ind_3);
-        ind_3.setLayout(ind_3Layout);
-        ind_3Layout.setHorizontalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        ind_3Layout.setVerticalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-
-        btn_3.add(ind_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 3));
-
-        lbThu3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lbThu3.setForeground(new java.awt.Color(255, 255, 255));
-        lbThu3.setText("Setting");
-        btn_3.add(lbThu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 50));
-
-        topPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 110, 50));
-
         btnExit.setBackground(new java.awt.Color(32, 90, 180));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-turnoff.png"))); // NOI18N
         btnExit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -568,9 +594,18 @@ public class HomeUser extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-padlock.png"))); // NOI18N
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-giftbox.png"))); // NOI18N
+        lbNhanTichDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-giftbox.png"))); // NOI18N
+        lbNhanTichDiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhanTichDiemMouseClicked(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-notiffi.png"))); // NOI18N
+
+        lbTichDiem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbTichDiem.setForeground(new java.awt.Color(255, 255, 255));
+        lbTichDiem.setText("jLabel14");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -579,18 +614,21 @@ public class HomeUser extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNhanTichDiem))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel6)
-                        .addGap(43, 43, 43))))
+                        .addGap(43, 43, 43))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lbTichDiem)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -604,7 +642,9 @@ public class HomeUser extends javax.swing.JFrame {
                             .addComponent(jLabel4)))
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jLabel7)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbTichDiem)
+                    .addComponent(lbNhanTichDiem))
                 .addGap(23, 23, 23))
         );
 
@@ -708,18 +748,7 @@ public class HomeUser extends javax.swing.JFrame {
                 btnOrderMouseClicked(evt);
             }
         });
-        PanelHome.add(btnOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 130, 100));
-
-        btnGuide.setBackground(new java.awt.Color(255, 255, 255));
-        btnGuide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-guide.png"))); // NOI18N
-        btnGuide.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuide.setBorderPainted(false);
-        btnGuide.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGuideMouseClicked(evt);
-            }
-        });
-        PanelHome.add(btnGuide, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 130, 100));
+        PanelHome.add(btnOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 130, 100));
 
         lbStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-staff.png"))); // NOI18N
         PanelHome.add(lbStaff, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, 150));
@@ -733,19 +762,15 @@ public class HomeUser extends javax.swing.JFrame {
                 btnDailyCheckMouseClicked(evt);
             }
         });
-        PanelHome.add(btnDailyCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 100));
+        PanelHome.add(btnDailyCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 130, 100));
 
         lbOrder.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbOrder.setText("Đặt Bàn");
-        PanelHome.add(lbOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 80, 30));
+        PanelHome.add(lbOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 80, 30));
 
         lbDailyCheckin.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbDailyCheckin.setText("Tích Điểm ");
-        PanelHome.add(lbDailyCheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 90, 30));
-
-        lbHDSD.setFont(new java.awt.Font("Noto Sans CJK SC Bold", 1, 14)); // NOI18N
-        lbHDSD.setText("Hướng Dẫn ");
-        PanelHome.add(lbHDSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 100, 30));
+        PanelHome.add(lbDailyCheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 90, 30));
 
         btnContact.setBackground(new java.awt.Color(255, 255, 255));
         btnContact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-email.png"))); // NOI18N
@@ -756,11 +781,11 @@ public class HomeUser extends javax.swing.JFrame {
                 btnContactMouseClicked(evt);
             }
         });
-        PanelHome.add(btnContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 130, 100));
+        PanelHome.add(btnContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 130, 100));
 
         lbContact.setFont(new java.awt.Font("Noto Sans CJK KR Bold", 1, 14)); // NOI18N
         lbContact.setText("Liên Hệ");
-        PanelHome.add(lbContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 90, 30));
+        PanelHome.add(lbContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 90, 30));
 
         lbWelcome.setFont(new java.awt.Font("Noto Sans CJK TC Thin", 1, 16)); // NOI18N
         lbWelcome.setText("Tôtô xin chúc quý khách có một ngày vui vẻ !");
@@ -960,51 +985,41 @@ public class HomeUser extends javax.swing.JFrame {
 
         Container.add(PanelDatban, "card3");
 
-        PanelTichdiem.setBackground(new java.awt.Color(255, 255, 255));
-        PanelTichdiem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnBack1.setBackground(new java.awt.Color(255, 255, 255));
-        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
-        btnBack1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBack1.setBorderPainted(false);
-        btnBack1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBack1MouseClicked(evt);
-            }
-        });
-        PanelTichdiem.add(btnBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
-
-        Container.add(PanelTichdiem, "card3");
-
-        PanelHuongdan.setBackground(new java.awt.Color(255, 255, 255));
-        PanelHuongdan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnBack2.setBackground(new java.awt.Color(255, 255, 255));
-        btnBack2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
-        btnBack2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBack2.setBorderPainted(false);
-        btnBack2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBack2MouseClicked(evt);
-            }
-        });
-        PanelHuongdan.add(btnBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
-
-        Container.add(PanelHuongdan, "card3");
-
         PanelLienhe.setBackground(new java.awt.Color(255, 255, 255));
         PanelLienhe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBack3.setBackground(new java.awt.Color(255, 255, 255));
-        btnBack3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
-        btnBack3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBack3.setBorderPainted(false);
-        btnBack3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-back.png"))); // NOI18N
+        lbBack1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBack3MouseClicked(evt);
+                lbBack1MouseClicked(evt);
             }
         });
-        PanelLienhe.add(btnBack3, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 325, 130, 100));
+        PanelLienhe.add(lbBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, -1, 60));
+
+        lbStaff2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-staff.png"))); // NOI18N
+        PanelLienhe.add(lbStaff2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 150));
+
+        lbWelcome7.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbWelcome7.setText("Tôtô rất muốn nhận được những lời phản hồi từ phía bạn !");
+        PanelLienhe.add(lbWelcome7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 460, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Phản hồi :");
+        PanelLienhe.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, 20));
+
+        tAPhanHoi.setColumns(20);
+        tAPhanHoi.setRows(5);
+        jScrollPane2.setViewportView(tAPhanHoi);
+
+        PanelLienhe.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 410, 120));
+
+        btnPhanHoi.setText("SEND");
+        btnPhanHoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPhanHoiMouseClicked(evt);
+            }
+        });
+        PanelLienhe.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 80, 30));
 
         Container.add(PanelLienhe, "card3");
 
@@ -1065,6 +1080,61 @@ public class HomeUser extends javax.swing.JFrame {
         PanelHistory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Container.add(PanelHistory, "card3");
 
+        PanelProfile.setBackground(new java.awt.Color(255, 255, 255));
+        PanelProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbStaff1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-staff.png"))); // NOI18N
+        PanelProfile.add(lbStaff1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 130, 150));
+
+        lbNameuser2.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
+        lbNameuser2.setText("NameUser");
+        PanelProfile.add(lbNameuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 200, 30));
+
+        lbWelcome5.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbWelcome5.setText("Tôtô xin chào quý khách !");
+        PanelProfile.add(lbWelcome5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 230, 30));
+
+        lbWelcome6.setFont(new java.awt.Font("Noto Sans CJK JP Thin", 1, 16)); // NOI18N
+        lbWelcome6.setText("Đây là phần xem và hiển thị cài đặt tài khoản ! ");
+        PanelProfile.add(lbWelcome6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 380, 30));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Mật khẩu          :");
+        PanelProfile.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
+
+        lbNameuser3.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
+        lbNameuser3.setText("NameUser");
+        PanelProfile.add(lbNameuser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 200, 30));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Tên Đăng Nhập: ");
+        PanelProfile.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
+
+        lbPasswordprofile.setFont(new java.awt.Font("Noto Sans CJK KR Thin", 1, 16)); // NOI18N
+        lbPasswordprofile.setText("*************");
+        PanelProfile.add(lbPasswordprofile, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 249, 110, -1));
+
+        btnShowpass.setBackground(new java.awt.Color(255, 255, 255));
+        btnShowpass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/techcoffee/Images/ic-show.png"))); // NOI18N
+        btnShowpass.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        btnShowpass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnShowpassMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnShowpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 40, 30));
+
+        btnChangePass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnChangePass.setText("Đổi mật khẩu");
+        btnChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnChangePassMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnChangePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 120, 30));
+
+        Container.add(PanelProfile, "card3");
+
         getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 700, 440));
 
         pack();
@@ -1072,9 +1142,10 @@ public class HomeUser extends javax.swing.JFrame {
 
     private void btn_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_4MousePressed
         // TODO add your handling code here:
+        
         setColor(btn_4);
         ind_4.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_5},new JPanel[]{ind_2,ind_3,ind_5});
+        resetColor(new JPanel[]{btn_2,btn_5},new JPanel[]{ind_2,ind_5});
         switchPanel(PanelHistory);
     }//GEN-LAST:event_btn_4MousePressed
 
@@ -1082,22 +1153,22 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_5);
         ind_5.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_4},new JPanel[]{ind_2,ind_3,ind_4});
+        resetColor(new JPanel[]{btn_2,btn_4},new JPanel[]{ind_2,ind_4});
+        String lbnameuser2 ="Chào "+usernamesession+",";
+        lbNameuser2.setText(lbnameuser2);
+        lbNameuser3.setText(usernamesession);
+        switchPanel(PanelProfile);
     }//GEN-LAST:event_btn_5MousePressed
-
-    private void btn_3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_3MousePressed
-        // TODO add your handling code here:
-        setColor(btn_3);
-        ind_3.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_5,btn_4},new JPanel[]{ind_2,ind_5,ind_4});
-    }//GEN-LAST:event_btn_3MousePressed
 
     private void btn_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MousePressed
         // TODO add your handling code here:
         setColor(btn_2);
         ind_2.setOpaque(true);
-        resetColor(new JPanel[]{btn_4,btn_3,btn_5},new JPanel[]{ind_4,ind_3,ind_5});
-        switchPanel(PanelHome);
+        resetColor(new JPanel[]{btn_4,btn_5},new JPanel[]{ind_4,ind_5});
+        if(tempForm==1)
+            switchPanel(PanelFormDB);
+        else
+            switchPanel(PanelHome);
     }//GEN-LAST:event_btn_2MousePressed
 
     //Drag window 
@@ -1129,30 +1200,10 @@ public class HomeUser extends javax.swing.JFrame {
         update_label();
     }//GEN-LAST:event_btnOrderMouseClicked
 
-    private void btnBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseClicked
-        // TODO add your handling code here:
-        switchPanel(PanelHome);
-    }//GEN-LAST:event_btnBack1MouseClicked
-
-    private void btnBack2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack2MouseClicked
-        // TODO add your handling code here:
-        switchPanel(PanelHome);
-    }//GEN-LAST:event_btnBack2MouseClicked
-
-    private void btnBack3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack3MouseClicked
-        // TODO add your handling code here:
-        switchPanel(PanelHome);
-    }//GEN-LAST:event_btnBack3MouseClicked
-
     private void btnDailyCheckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDailyCheckMouseClicked
         // TODO add your handling code here:
-        switchPanel(PanelTichdiem);
+        JOptionPane.showMessageDialog(this,"Với mỗi lần đặt bàn bạn sẽ có 1 điểm, đủ 14 điểm nhấn vào hộp quà bên trái để nhận thưởng");
     }//GEN-LAST:event_btnDailyCheckMouseClicked
-
-    private void btnGuideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuideMouseClicked
-        // TODO add your handling code here:
-        switchPanel(PanelHuongdan);
-    }//GEN-LAST:event_btnGuideMouseClicked
 
     private void btnContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContactMouseClicked
         // TODO add your handling code here:
@@ -1379,8 +1430,243 @@ public class HomeUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         tempForm=0;
         datXong(bann);
+        int tempTD=getTichDiem(usernamesession);
+        if(tempTD<14) {
+            CallableStatement cStmt = null; 
+            ResultSet rs =null;
+            try{
+            cStmt = conn.prepareCall("{call update_tichdiem(?,?)}"); 
+            cStmt.setString(1,usernamesession); 
+            tempTD=tempTD+1;
+            cStmt.setInt(2,tempTD); 
+            rs = cStmt.executeQuery();
+            }catch(Exception ex){
+                System.out.println("SQL exception: "+ex.getMessage());
+            }finally{
+                //Giai phong
+                if(rs!=null){
+                   try{
+                       rs.close();    
+                   }catch(SQLException sqlEx){}
+                   rs=null;
+                }
+                if(cStmt!= null){
+                    try{
+                        cStmt.close();
+                    }catch(SQLException sqlEx){}
+                    cStmt=null;
+                }
+            }        
+        }
+        setTichDiem(usernamesession);
         switchPanel(PanelHome);
     }//GEN-LAST:event_btnDatMouseClicked
+
+    private void btnShowpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShowpassMouseClicked
+        // TODO add your handling code here:
+        //Popup input
+        JPasswordField field1 = new JPasswordField("");
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Nhập mật khẩu:"));
+        panel.add(field1);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Xác nhận",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+                PreparedStatement pSm=null;
+                ResultSet rs =null;
+            try {
+             
+                pSm = conn.prepareCall("SELECT * from users where username=? and passwd=?");
+                pSm.setString(1, usernamesession);
+                pSm.setString(2, field1.getText().toString());
+                rs = pSm.executeQuery();
+                if (rs.next()) {
+                    String temp1=rs.getString(3);
+                    lbPasswordprofile.setText(temp1);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Mật Khẩu Sai");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Server error");
+                System.out.println("SQL exception: " + e.getMessage());
+            }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(pSm!= null){
+                try{
+                    pSm.close();
+                }catch(SQLException sqlEx){}
+                pSm=null;
+            }
+        }
+        } else {
+    
+        }
+    }//GEN-LAST:event_btnShowpassMouseClicked
+
+    private void btnChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePassMouseClicked
+        // TODO add your handling code here:
+        JPasswordField field0 = new JPasswordField("");
+        JPasswordField field1 = new JPasswordField("");
+        JPasswordField field2 = new JPasswordField("");
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Nhập mật khẩu cũ:"));
+        panel.add(field0);
+        panel.add(new JLabel("Nhập mật khẩu mới:"));
+        panel.add(field1);
+        panel.add(new JLabel("Nhập lại mật khẩu:"));
+        panel.add(field2);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Đổi mật khẩu",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            if(field1.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
+            }else if(!field2.getText().toString().equals(field1.getText().toString())){
+                JOptionPane.showMessageDialog(this,"2 mật khẩu phải giống nhau");
+            }else if(field1.getText().length()<3 ||field0.getText().length()<3 ){
+                JOptionPane.showMessageDialog(this,"Mật khẩu phải nhiều hơn 3 kí tự");
+            }else{
+                int check=0;
+                PreparedStatement pSm=null;
+                ResultSet rs =null;
+            try {
+             
+                pSm = conn.prepareCall("SELECT * from users where username=? and passwd=?");
+                pSm.setString(1, usernamesession);
+                pSm.setString(2, field0.getText().toString());
+                rs = pSm.executeQuery();
+                
+                if (rs.next()) {
+                    check=1;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Mật Khẩu Sai");
+                }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Server error");
+                    System.out.println("SQL exception: " + e.getMessage());
+                }finally{
+                //Giai phong
+                if(rs!=null){
+                   try{
+                       rs.close();    
+                   }catch(SQLException sqlEx){}
+                   rs=null;
+                    }
+                if(pSm!= null){
+                    try{
+                        pSm.close();
+                    }catch(SQLException sqlEx){}
+                    pSm=null;
+                }
+                }
+                
+        if(check==1){   
+            
+            CallableStatement cStmt = null; 
+            //ResultSet rs =null;
+            try{
+            cStmt = conn.prepareCall("{call update_pass(?,?)}"); 
+            cStmt.setString(1,usernamesession); 
+            cStmt.setString(2,field1.getText().toString()); 
+            rs = cStmt.executeQuery();
+            JOptionPane.showMessageDialog(this,"Đổi mật khẩu thành công");
+            }catch(Exception ex){
+                System.out.println("SQL exception: "+ex.getMessage());
+            }finally{
+                //Giai phong
+                if(rs!=null){
+                   try{
+                       rs.close();    
+                   }catch(SQLException sqlEx){}
+                   rs=null;
+                }
+                if(cStmt!= null){
+                    try{
+                        cStmt.close();
+                    }catch(SQLException sqlEx){}
+                    cStmt=null;
+                }
+            }
+        }
+        }
+        }
+    }//GEN-LAST:event_btnChangePassMouseClicked
+
+    private void lbNhanTichDiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanTichDiemMouseClicked
+        // TODO add your handling code here:
+        if(getTichDiem(usernamesession)<14){
+            JOptionPane.showMessageDialog(this,"Bạn chưa đủ điểm để nhận thưởng");
+        }else if(getTichDiem(usernamesession)==15){
+            JOptionPane.showMessageDialog(this,"Hãy đến techcoffe nhận thưởng và tham gia tiếp");
+        }else if(getTichDiem(usernamesession)==14){
+            CallableStatement cStmt = null; 
+            ResultSet rs =null;
+            try{
+            cStmt = conn.prepareCall("{call update_tichdiem(?,?)}"); 
+            cStmt.setString(1,usernamesession); 
+            cStmt.setInt(2,15); 
+            rs = cStmt.executeQuery();
+            JOptionPane.showMessageDialog(this,"Chúc mừng bạn! hãy đến techcoffe để nhận thưởng trực tiếp");
+            }catch(Exception ex){
+                System.out.println("SQL exception: "+ex.getMessage());
+            }finally{
+                //Giai phong
+                if(rs!=null){
+                   try{
+                       rs.close();    
+                   }catch(SQLException sqlEx){}
+                   rs=null;
+                }
+                if(cStmt!= null){
+                    try{
+                        cStmt.close();
+                    }catch(SQLException sqlEx){}
+                    cStmt=null;
+                }
+            }
+        }
+    }//GEN-LAST:event_lbNhanTichDiemMouseClicked
+
+    private void lbBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBack1MouseClicked
+        // TODO add your handling code here:
+        switchPanel(PanelHome);
+    }//GEN-LAST:event_lbBack1MouseClicked
+
+    private void btnPhanHoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPhanHoiMouseClicked
+        // TODO add your handling code here:
+        if(tAPhanHoi.getText().toString().equals("")){
+            JOptionPane.showMessageDialog(this,"Bạn hãy nhập gì đó trước khi gửi");
+        }else{
+        PreparedStatement pSm= null;
+        try{
+        pSm = conn.prepareStatement("insert into feelback(userNameF,TimeF,noiDung) values(?,?,?)");
+        pSm.setString(1, usernamesession);
+        String timeF=hour+":"+minute+" date:"+day+"/"+month+"/"+year;
+        pSm.setString(2, timeF);
+        pSm.setString(3, tAPhanHoi.getText().toString());
+        pSm.executeUpdate();
+        JOptionPane.showMessageDialog(this,"Phản hồi của bạn đã được gửi");
+        switchPanel(PanelHome);
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(pSm!= null){
+                try{
+                    pSm.close();
+                }catch(SQLException sqlEx){}
+                pSm=null;
+            }
+        }
+        }
+    }//GEN-LAST:event_btnPhanHoiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1437,19 +1723,17 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel PanelFormDB;
     private javax.swing.JPanel PanelHistory;
     private javax.swing.JPanel PanelHome;
-    private javax.swing.JPanel PanelHuongdan;
     private javax.swing.JPanel PanelLienhe;
-    private javax.swing.JPanel PanelTichdiem;
-    private javax.swing.JButton btnBack1;
-    private javax.swing.JButton btnBack2;
-    private javax.swing.JButton btnBack3;
+    private javax.swing.JPanel PanelProfile;
+    private javax.swing.JButton btnChangePass;
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnDailyCheck;
     private javax.swing.JButton btnDat;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnGuide;
     private javax.swing.JButton btnOrder;
+    private javax.swing.JButton btnPhanHoi;
     private javax.swing.JButton btnRefesh;
+    private javax.swing.JButton btnShowpass;
     private javax.swing.JButton btnSo1;
     private javax.swing.JButton btnSo10;
     private javax.swing.JButton btnSo2;
@@ -1461,19 +1745,19 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JButton btnSo8;
     private javax.swing.JButton btnSo9;
     private javax.swing.JPanel btn_2;
-    private javax.swing.JPanel btn_3;
     private javax.swing.JPanel btn_4;
     private javax.swing.JPanel btn_5;
     private javax.swing.JComboBox<String> cbxBanNguoi;
     private javax.swing.JComboBox<String> cbxTimeDat;
     private javax.swing.JPanel ind_2;
-    private javax.swing.JPanel ind_3;
     private javax.swing.JPanel ind_4;
     private javax.swing.JPanel ind_5;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1486,15 +1770,20 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbBack;
+    private javax.swing.JLabel lbBack1;
     private javax.swing.JLabel lbContact;
     private javax.swing.JLabel lbDailyCheckin;
     private javax.swing.JLabel lbDay;
-    private javax.swing.JLabel lbHDSD;
     public static javax.swing.JLabel lbNameuser;
     public static javax.swing.JLabel lbNameuser1;
+    public static javax.swing.JLabel lbNameuser2;
+    public static javax.swing.JLabel lbNameuser3;
+    private javax.swing.JLabel lbNhanTichDiem;
     private javax.swing.JLabel lbOrder;
+    public static javax.swing.JLabel lbPasswordprofile;
     private javax.swing.JLabel lbSo1;
     private javax.swing.JLabel lbSo10;
     private javax.swing.JLabel lbSo2;
@@ -1506,11 +1795,13 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbSo8;
     private javax.swing.JLabel lbSo9;
     private javax.swing.JLabel lbStaff;
+    private javax.swing.JLabel lbStaff1;
+    private javax.swing.JLabel lbStaff2;
     private javax.swing.JLabel lbThu;
     private javax.swing.JLabel lbThu2;
-    private javax.swing.JLabel lbThu3;
     private javax.swing.JLabel lbThu4;
     private javax.swing.JLabel lbThu5;
+    private javax.swing.JLabel lbTichDiem;
     private javax.swing.JLabel lbTime;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbWelcome;
@@ -1518,6 +1809,10 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbWelcome2;
     private javax.swing.JLabel lbWelcome3;
     private javax.swing.JLabel lbWelcome4;
+    private javax.swing.JLabel lbWelcome5;
+    private javax.swing.JLabel lbWelcome6;
+    private javax.swing.JLabel lbWelcome7;
+    private javax.swing.JTextArea tAPhanHoi;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ create table if not exists users(
     passwd char(16) not null,
     check_admin char(1) default "0",
     feelback varchar(1000),
+    tichDiem int default 0,
     primary key (iduser)
 );
 
@@ -18,6 +19,21 @@ create table if not exists datBan (
     timeDatban nvarchar(30) not null,
     yeuCau nvarchar(1000)
 );
+
+create table if not exists history_users (
+	idHistory int not null primary key AUTO_INCREMENT,
+    userNameH char(16) not null,
+    TimeH nvarchar(100) not null,
+    noiDung nvarchar(100) not null
+);
+create table if not exists feelback (
+	idfeelback int not null primary key AUTO_INCREMENT,
+    userNameF char(16) not null,
+    TimeF nvarchar(100) not null,
+    noiDung nvarchar(500) not null
+);
+
+
 
 insert into users(username,passwd,check_admin,feelback) values("username1","123","0","Chuc mung nam moi");
 insert into users(username,passwd,check_admin,feelback) values("admin1","123","1","Chuc mung nam moi haha");
@@ -159,3 +175,33 @@ begin
 return tt;
 end$$
 SET GLOBAL log_bin_trust_function_creators = 1;
+
+create function xuatTichDiem(userTD char(16))
+returns int
+reads sql data deterministic
+begin
+ declare tt int;
+	set tt=(select tichDiem from techcoffee.users where username =userTD);
+return tt;
+end$$
+
+-- thu tuc create user du lieu
+create procedure create_user(idemployee1 char(4),emplyeename1 char(35), phonenumber1 char(10),  wage1 char(11),  workingday1 date, birthday1 date, idemployeenew char(4))
+begin
+	if exists (select idemployee from employee)
+    then
+		update employee set idemployee = idemployee1 , emplyeename=emplyeename1, phonenumber=phonenumber1, wage=wage1, workingday=workingday1, birthday=birthday1 where idemployee=idemployeenew ;
+    end if;
+end$$
+
+create procedure update_pass(username1 char(16),passwd1 char(16))
+begin
+	update users set passwd = passwd1 where username =username1;
+end$$
+
+-- call update_pass('username1','1234')$$
+create procedure update_tichdiem(username1 char(16),point1 int)
+begin
+	update users set tichDiem = point1 where username =username1;
+end$$
+

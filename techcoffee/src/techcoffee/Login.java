@@ -284,6 +284,7 @@ public class Login extends javax.swing.JFrame {
                     hu.lbNameuser.setText(this.username.getText().toString());
                     hu.lbNameuser1.setText("Xin chào " + this.username.getText().toString() + ",");
                     hu.getUser(this.username.getText().toString());
+                    hu.setTichDiem(this.username.getText().toString());
                     hu.setVisible(true);
                     hu.pack();
                     hu.setLocationRelativeTo(null);
@@ -341,6 +342,7 @@ public class Login extends javax.swing.JFrame {
                         hu.lbNameuser.setText(this.username.getText().toString());
                         hu.lbNameuser1.setText("Xin chào " + this.username.getText().toString() + ",");
                         hu.getUser(this.username.getText().toString());
+                        hu.setTichDiem(this.username.getText().toString());
                         hu.setVisible(true);
                         hu.pack();
                         hu.setLocationRelativeTo(null);
@@ -397,6 +399,7 @@ public class Login extends javax.swing.JFrame {
                     homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
                     homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
                     homeuser.getUser(this.lbUsernameSignup.getText().toString());
+                    homeuser.setTichDiem(this.username.getText().toString());
                     homeuser.setVisible(true);
                     homeuser.pack();
                     homeuser.setLocationRelativeTo(null);
@@ -458,6 +461,7 @@ public class Login extends javax.swing.JFrame {
                 homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
                 homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
                 homeuser.getUser(this.lbUsernameSignup.getText().toString());
+                homeuser.setTichDiem(this.username.getText().toString());
                 homeuser.setVisible(true);
                 homeuser.pack();
                 homeuser.setLocationRelativeTo(null);
