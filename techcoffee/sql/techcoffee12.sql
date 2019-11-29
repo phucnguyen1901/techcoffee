@@ -40,7 +40,6 @@ insert into users(username,passwd,check_admin) values("admin1","123","1");
 insert into users(username,passwd,check_admin) values("username2","456","0");
 insert into users(username,passwd,check_admin) values("admin2","456","1");
 
--- select * from users;
 
 create table if not exists employee (
 	idemployee char(4) not null,
