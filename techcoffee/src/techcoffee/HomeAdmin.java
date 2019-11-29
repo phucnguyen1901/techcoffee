@@ -5,6 +5,7 @@
  */
 package techcoffee;
 
+import java.awt.Color;
 import javax.swing.JPanel;
 import java.sql.*;
 import javax.swing.JFrame;
@@ -35,7 +36,7 @@ public class HomeAdmin extends javax.swing.JFrame {
     public void connectDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
             pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
             System.out.print("Connect is success");
 
@@ -136,10 +137,14 @@ public class HomeAdmin extends javax.swing.JFrame {
         jPanelfeelback = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        setidUser = new javax.swing.JLabel();
+        settimeFeelback = new javax.swing.JLabel();
         setusername = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         setfeelback = new javax.swing.JTextArea();
+        setidFeelback = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         bnt_logout = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -415,7 +420,7 @@ public class HomeAdmin extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Mức lương: ");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel9.setText("ID:");
 
         btnNhapLai.setBackground(new java.awt.Color(0, 0, 0));
@@ -509,17 +514,14 @@ public class HomeAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(getNgayVaolam, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelthemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelthemNVLayout.createSequentialGroup()
-                        .addComponent(getID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5))
-                    .addGroup(jPanelthemNVLayout.createSequentialGroup()
-                        .addGroup(jPanelthemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(getMucLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel9)))
-                .addGap(25, 25, 25)
+                .addGroup(jPanelthemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(getMucLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelthemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(23, 23, 23)
                 .addGroup(jPanelthemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacnhanThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -740,7 +742,8 @@ public class HomeAdmin extends javax.swing.JFrame {
                             .addGroup(jPanelXoaNVLayout.createSequentialGroup()
                                 .addGroup(jPanelXoaNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel19)
-                                    .addComponent(jLabel21))
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22))
                                 .addGroup(jPanelXoaNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelXoaNVLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
@@ -755,10 +758,9 @@ public class HomeAdmin extends javax.swing.JFrame {
                                                     .addComponent(setNgaysinhXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(setHotenXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addComponent(setsdtXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(setNgayVaoLamXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jLabel22)))
+                                            .addComponent(setNgayVaoLamXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(jPanelXoaNVLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
+                        .addGap(219, 219, 219)
                         .addComponent(btnXacNhanCapnhatNV1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(273, Short.MAX_VALUE))
         );
@@ -785,16 +787,13 @@ public class HomeAdmin extends javax.swing.JFrame {
                 .addGroup(jPanelXoaNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(setMucLuongXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanelXoaNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelXoaNVLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addGap(212, 212, 212))
-                    .addGroup(jPanelXoaNVLayout.createSequentialGroup()
-                        .addComponent(setIDXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXacNhanCapnhatNV1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153))))
+                .addGap(23, 23, 23)
+                .addGroup(jPanelXoaNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(setIDXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addGap(18, 18, 18)
+                .addComponent(btnXacNhanCapnhatNV1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
         );
 
         jPanellichSu.setBackground(new java.awt.Color(255, 255, 255));
@@ -847,12 +846,12 @@ public class HomeAdmin extends javax.swing.JFrame {
         jPanellichSuLayout.setHorizontalGroup(
             jPanellichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanellichSuLayout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnadd_history, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(82, 82, 82)
                 .addComponent(btndelete_history, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
-            .addComponent(jScrollPane2)
+                .addGap(236, 236, 236))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         jPanellichSuLayout.setVerticalGroup(
             jPanellichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -869,13 +868,13 @@ public class HomeAdmin extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID USER", "USERNAME", "feelback"
+                "ID Feelback", "USERNAME", "feelback", "Time"
             }
         ));
         jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -891,6 +890,12 @@ public class HomeAdmin extends javax.swing.JFrame {
         setfeelback.setToolTipText("");
         jScrollPane4.setViewportView(setfeelback);
 
+        jLabel4.setText("ID Feeback:");
+
+        jLabel5.setText("USERNAME:");
+
+        jLabel23.setText("ID Feelback:");
+
         javax.swing.GroupLayout jPanelfeelbackLayout = new javax.swing.GroupLayout(jPanelfeelback);
         jPanelfeelback.setLayout(jPanelfeelbackLayout);
         jPanelfeelbackLayout.setHorizontalGroup(
@@ -899,22 +904,45 @@ public class HomeAdmin extends javax.swing.JFrame {
             .addGroup(jPanelfeelbackLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(setusername, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(setidUser, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addGroup(jPanelfeelbackLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(88, Short.MAX_VALUE))
+                    .addGroup(jPanelfeelbackLayout.createSequentialGroup()
+                        .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(setusername, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                            .addComponent(setidFeelback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(settimeFeelback, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(142, 142, 142))))
         );
         jPanelfeelbackLayout.setVerticalGroup(
             jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelfeelbackLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(setidUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(setusername, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelfeelbackLayout.createSequentialGroup()
+                            .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(setidFeelback, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(45, 45, 45))
+                        .addGroup(jPanelfeelbackLayout.createSequentialGroup()
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanelfeelbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(setusername, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(settimeFeelback, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredMainLayout = new javax.swing.GroupLayout(jLayeredMain);
@@ -1244,21 +1272,27 @@ public class HomeAdmin extends javax.swing.JFrame {
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         int i = jTable3.getSelectedRow();
         TableModel model = jTable3.getModel();
-        setidUser.setText("ID USER: " + model.getValueAt(i, 0).toString());
-        setusername.setText("USERNAME: " + model.getValueAt(i, 1).toString());
+        setidFeelback.setText(model.getValueAt(i, 0).toString());
+        setusername.setText(model.getValueAt(i, 1).toString());
         setfeelback.setText(model.getValueAt(i, 2).toString());
+        settimeFeelback.setText(model.getValueAt(i,3).toString());
+        setidFeelback.setForeground(Color.red);
+        setusername.setForeground(Color.red);
+        settimeFeelback.setForeground(Color.red);
+        
+        
     }//GEN-LAST:event_jTable3MouseClicked
 
     private void btnfeelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfeelbackMouseClicked
         switchPanel(jPanelfeelback);
         try {
 
-            pSm = conn.prepareStatement("SELECT * from users");
+            pSm = conn.prepareStatement("SELECT * from feelback");
             rs = pSm.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) jTable3.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
-                Object o[] = {rs.getString("iduser"), rs.getString("username"), rs.getString("feelback")};
+                Object o[] = {rs.getString("idfeelback"), rs.getString("userNameF"), rs.getString("noiDung"),rs.getString("TimeF")};
                 tm.addRow(o);
             }
         } catch (Exception e) {
@@ -1346,7 +1380,10 @@ public class HomeAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1390,9 +1427,10 @@ public class HomeAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField setNgaysinh;
     private javax.swing.JTextField setNgaysinhXoa;
     private javax.swing.JTextArea setfeelback;
-    private javax.swing.JLabel setidUser;
+    private javax.swing.JLabel setidFeelback;
     private javax.swing.JTextField setsdt;
     private javax.swing.JTextField setsdtXoa;
+    private javax.swing.JLabel settimeFeelback;
     private javax.swing.JLabel setusername;
     public static javax.swing.JLabel usernamelogin;
     // End of variables declaration//GEN-END:variables

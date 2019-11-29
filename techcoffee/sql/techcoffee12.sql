@@ -6,7 +6,6 @@ create table if not exists users(
 	username char(16) not null unique,
     passwd char(16) not null,
     check_admin char(1) default "0",
-    feelback varchar(1000),
     tichDiem int default 0,
     primary key (iduser)
 );
@@ -34,13 +33,14 @@ create table if not exists feelback (
 );
 
 
+insert into feelback values(null,"username1","12h","hahahhahahhahha");
 
-insert into users(username,passwd,check_admin,feelback) values("username1","123","0","Chuc mung nam moi");
-insert into users(username,passwd,check_admin,feelback) values("admin1","123","1","Chuc mung nam moi haha");
-insert into users(username,passwd,check_admin,feelback) values("username2","456","0","Chuc mung nam moi");
-insert into users(username,passwd,check_admin,feelback) values("admin2","456","1","Chuc mung nam moi haha");
+insert into users(username,passwd,check_admin) values("username1","123","0");
+insert into users(username,passwd,check_admin) values("admin1","123","1");
+insert into users(username,passwd,check_admin) values("username2","456","0");
+insert into users(username,passwd,check_admin) values("admin2","456","1");
 
-select * from users;
+-- select * from users;
 
 create table if not exists employee (
 	idemployee char(4) not null,

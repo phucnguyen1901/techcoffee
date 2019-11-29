@@ -119,7 +119,7 @@ public class HomeUser extends javax.swing.JFrame {
         try{
             
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=H_Ghost");     
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=000001");     
         }catch(Exception ex){
             System.out.println("That Bai");
             System.out.println("SQL exception: "+ex.getMessage());

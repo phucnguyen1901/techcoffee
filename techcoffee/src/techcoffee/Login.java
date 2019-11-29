@@ -29,27 +29,29 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
     }
-    
-   Connection conn;
-   PreparedStatement pSm;
-   ResultSet rs;
-   public void switchPanel(JPanel panel){
+
+    Connection conn;
+    PreparedStatement pSm;
+    ResultSet rs;
+
+    public void switchPanel(JPanel panel) {
         Container.removeAll();
         Container.add(panel);
         Container.repaint();
         Container.revalidate();
-    
+
     }
-   public void connectDB(){
-         try {
-                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
-                System.out.print("Connect is success");
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Server error");
-            }
-   }
+
+    public void connectDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+            System.out.print("Connect is success");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Server error");
+        }
+    }
 
     //getuser name 
     /**
@@ -69,7 +71,6 @@ public class Login extends javax.swing.JFrame {
         passwd = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Panelsignup = new javax.swing.JPanel();
@@ -133,10 +134,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         Panellogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 350, 40));
-
-        jComboBox1.setBackground(new java.awt.Color(255, 102, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "USER", "ADMIN" }));
-        Panellogin.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 153, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -245,34 +242,23 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String selected = jComboBox1.getSelectedItem().toString();
-        if (selected.equals("ADMIN")) {
-            try {
-                pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
-                pSm.setString(1, username.getText().toString());
-                pSm.setString(2, passwd.getText().toString());
-                pSm.setString(3, "1");
-                rs = pSm.executeQuery();
-                usernamee = username.getText().toString();
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Login is success");
-                    HomeAdmin ha = new HomeAdmin();
-                    ha.usernamelogin.setText(this.username.getText().toString());
-                    ha.setVisible(true);
-                    ha.pack();
-                    ha.setLocationRelativeTo(null);
-                    ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Login is not success");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Server error");
-            }
-
-        } else {
-            try {
-             
+        try {
+            pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+            pSm.setString(1, username.getText().toString());
+            pSm.setString(2, passwd.getText().toString());
+            pSm.setString(3, "1");
+            rs = pSm.executeQuery();
+            usernamee = username.getText().toString();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Login is success");
+                HomeAdmin ha = new HomeAdmin();
+                ha.usernamelogin.setText(this.username.getText().toString());
+                ha.setVisible(true);
+                ha.pack();
+                ha.setLocationRelativeTo(null);
+                ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            } else {
                 pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                 pSm.setString(1, username.getText().toString());
                 pSm.setString(2, passwd.getText().toString());
@@ -293,44 +279,32 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Login is not success");
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Server error");
-                System.out.println("SQL exception: " + e.getMessage());
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Server error");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String selected = jComboBox1.getSelectedItem().toString();
-            if (selected.equals("ADMIN")) {
-                try {
-                    pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
-                    pSm.setString(1, username.getText().toString());
-                    pSm.setString(2, passwd.getText().toString());
-                    pSm.setString(3, "1");
-                    rs = pSm.executeQuery();
-                    usernamee = username.getText().toString();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(null, "Login is success");
-                        HomeAdmin ha = new HomeAdmin();
-                        ha.usernamelogin.setText(this.username.getText().toString());
-                        ha.setVisible(true);
-                        ha.pack();
-                        ha.setLocationRelativeTo(null);
-                        ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Login is not success");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Server error");
-                }
-
-            } else {
-                try {
-                    
+            try {
+                pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
+                pSm.setString(1, username.getText().toString());
+                pSm.setString(2, passwd.getText().toString());
+                pSm.setString(3, "1");
+                rs = pSm.executeQuery();
+                usernamee = username.getText().toString();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Login is success");
+                    HomeAdmin ha = new HomeAdmin();
+                    ha.usernamelogin.setText(this.username.getText().toString());
+                    ha.setVisible(true);
+                    ha.pack();
+                    ha.setLocationRelativeTo(null);
+                    ha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
                     pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
                     pSm.setString(1, username.getText().toString());
                     pSm.setString(2, passwd.getText().toString());
@@ -351,10 +325,9 @@ public class Login extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Login is not success");
                     }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Server error");
-                    System.out.println("SQL exception: " + e.getMessage());
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Server error");
             }
         }
 
@@ -375,26 +348,26 @@ public class Login extends javax.swing.JFrame {
     private void lbPassSignup2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbPassSignup2KeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                if(lbUsernameSignup.getText().equals("")){
-                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-            }else if(lbPassSignup.getText().equals("")){
-                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-            }else if(lbPassSignup2.getText().equals("")){
-                JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-            }else if(!lbPassSignup2.getText().equals(lbPassSignup.getText())){
-                JOptionPane.showMessageDialog(this,"2 mật khẩu phải giống nhau");
-            }else if(lbUsernameSignup.getText().length()>=16){
-                JOptionPane.showMessageDialog(this,"Tên tài khoản phải nhỏ hơn 16 kí tự");
-            }else if(lbPassSignup.getText().length()<3){
-                JOptionPane.showMessageDialog(this,"Mật khẩu phải nhiều hơn 3 kí tự");
-            }else{
-                PreparedStatement pSm= null;
-                try{
+            if (lbUsernameSignup.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+            } else if (lbPassSignup.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+            } else if (lbPassSignup2.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+            } else if (!lbPassSignup2.getText().equals(lbPassSignup.getText())) {
+                JOptionPane.showMessageDialog(this, "2 mật khẩu phải giống nhau");
+            } else if (lbUsernameSignup.getText().length() >= 16) {
+                JOptionPane.showMessageDialog(this, "Tên tài khoản phải nhỏ hơn 16 kí tự");
+            } else if (lbPassSignup.getText().length() < 3) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu phải nhiều hơn 3 kí tự");
+            } else {
+                PreparedStatement pSm = null;
+                try {
                     pSm = conn.prepareStatement("insert into users(username,passwd) values(?,?)");
-                    pSm.setString(1,lbUsernameSignup.getText().toString());
+                    pSm.setString(1, lbUsernameSignup.getText().toString());
                     pSm.setString(2, lbPassSignup.getText().toString());
                     pSm.executeUpdate();
-                    JOptionPane.showMessageDialog(this,"Đăng ký thành công");
+                    JOptionPane.showMessageDialog(this, "Đăng ký thành công");
                     HomeUser homeuser = new HomeUser();
                     homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
                     homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
@@ -405,15 +378,16 @@ public class Login extends javax.swing.JFrame {
                     homeuser.setLocationRelativeTo(null);
                     homeuser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(this,"Tên tài khoản đã có người đăng ký");
-                }finally{
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Tên tài khoản đã có người đăng ký");
+                } finally {
                     //Giai phong
-                    if(pSm!= null){
-                        try{
+                    if (pSm != null) {
+                        try {
                             pSm.close();
-                        }catch(SQLException sqlEx){}
-                        pSm=null;
+                        } catch (SQLException sqlEx) {
+                        }
+                        pSm = null;
                     }
                 }
 
@@ -437,26 +411,26 @@ public class Login extends javax.swing.JFrame {
 
     private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignupMouseClicked
         // TODO add your handling code here:
-        if(lbUsernameSignup.getText().equals("")){
-            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-        }else if(lbPassSignup.getText().equals("")){
-            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-        }else if(lbPassSignup2.getText().equals("")){
-            JOptionPane.showMessageDialog(this,"Phải nhập đủ thông tin đăng ký");
-        }else if(!lbPassSignup2.getText().equals(lbPassSignup.getText())){
-            JOptionPane.showMessageDialog(this,"2 mật khẩu phải giống nhau");
-        }else if(lbUsernameSignup.getText().length()>=16){
-            JOptionPane.showMessageDialog(this,"Tên tài khoản phải nhỏ hơn 16 kí tự");
-        }else if(lbPassSignup.getText().length()<3){
-            JOptionPane.showMessageDialog(this,"Mật khẩu phải nhiều hơn 3 kí tự");
-        }else{
-            PreparedStatement pSm= null;
-            try{
+        if (lbUsernameSignup.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+        } else if (lbPassSignup.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+        } else if (lbPassSignup2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin đăng ký");
+        } else if (!lbPassSignup2.getText().equals(lbPassSignup.getText())) {
+            JOptionPane.showMessageDialog(this, "2 mật khẩu phải giống nhau");
+        } else if (lbUsernameSignup.getText().length() >= 16) {
+            JOptionPane.showMessageDialog(this, "Tên tài khoản phải nhỏ hơn 16 kí tự");
+        } else if (lbPassSignup.getText().length() < 3) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải nhiều hơn 3 kí tự");
+        } else {
+            PreparedStatement pSm = null;
+            try {
                 pSm = conn.prepareStatement("insert into users(username,passwd) values(?,?)");
-                pSm.setString(1,lbUsernameSignup.getText().toString());
+                pSm.setString(1, lbUsernameSignup.getText().toString());
                 pSm.setString(2, lbPassSignup.getText().toString());
                 pSm.executeUpdate();
-                JOptionPane.showMessageDialog(this,"Đăng ký thành công");
+                JOptionPane.showMessageDialog(this, "Đăng ký thành công");
                 HomeUser homeuser = new HomeUser();
                 homeuser.lbNameuser.setText(this.lbUsernameSignup.getText().toString());
                 homeuser.lbNameuser1.setText("Xin chào " + this.lbUsernameSignup.getText().toString() + ",");
@@ -467,18 +441,19 @@ public class Login extends javax.swing.JFrame {
                 homeuser.setLocationRelativeTo(null);
                 homeuser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.dispose();
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(this,"Tên tài khoản đã có người đăng ký");
-            }finally{
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Tên tài khoản đã có người đăng ký");
+            } finally {
                 //Giai phong
-                if(pSm!= null){
-                    try{
+                if (pSm != null) {
+                    try {
                         pSm.close();
-                    }catch(SQLException sqlEx){}
-                    pSm=null;
+                    } catch (SQLException sqlEx) {
+                    }
+                    pSm = null;
                 }
             }
-        
+
         }
     }//GEN-LAST:event_btnSignupMouseClicked
 
@@ -523,7 +498,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel Panelsignup;
     private javax.swing.JButton btnSignup;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
