@@ -27,8 +27,8 @@ public class HomeAdmin extends javax.swing.JFrame {
         initComponents();
         connectDB();
         jLayeredMain.removeAll();
+        hienthi();
         
-
     }
 
     Connection conn;
@@ -38,7 +38,7 @@ public class HomeAdmin extends javax.swing.JFrame {
     public void connectDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
             pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
             System.out.print("Connect is success");
 
@@ -691,13 +691,13 @@ public class HomeAdmin extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID Nhân viên", "Trạng thái", "Thời gian"
+                "ID Lưu", "ID nhân viên", "Trạng thái", "Thời gian"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -1238,7 +1238,7 @@ public class HomeAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Them that bai");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Server error");
+            JOptionPane.showMessageDialog(null, "ID bi trung ! Xin nhap ID khac");
         }
     }//GEN-LAST:event_btnXacnhanThemNVMouseClicked
 
@@ -1282,7 +1282,7 @@ public class HomeAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cap nhat that bai");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Server error");
+            JOptionPane.showMessageDialog(null, "ID bi trung ! Xin nhap ID khac");
         }
 
     }//GEN-LAST:event_btnXacNhanCapnhatNVMouseClicked
@@ -1300,7 +1300,7 @@ public class HomeAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Xoa that bai do ID trong");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Server error");
+            JOptionPane.showMessageDialog(null, "Xoa that bai");
         }
     }//GEN-LAST:event_btnXacNhanCapnhatNV1MouseClicked
 
@@ -1316,7 +1316,7 @@ public class HomeAdmin extends javax.swing.JFrame {
             DefaultTableModel tm = (DefaultTableModel) jTable2.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
-                Object o[] = {rs.getString("idemployee"), rs.getString("statuses"), rs.getString("date")};
+                Object o[] = {rs.getString("idsave_delete"), rs.getString("idemployee_savedelete"), rs.getString("statuses"), rs.getString("date")};
                 tm.addRow(o);
             }
         } catch (Exception e) {
@@ -1336,7 +1336,7 @@ public class HomeAdmin extends javax.swing.JFrame {
             DefaultTableModel tm = (DefaultTableModel) jTable2.getModel();
             tm.setRowCount(0);
             while (rs.next()) {
-                Object o[] = {rs.getString("idemployee"), rs.getString("statuses"), rs.getString("date")};
+                Object o[] = {rs.getString("idsave_add"), rs.getString("idemployee_saveadd"), rs.getString("statuses"), rs.getString("date")};
                 tm.addRow(o);
             }
         } catch (Exception e) {
@@ -1410,6 +1410,22 @@ public class HomeAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonBandadatMouseClicked
 
+    public void hienthi(){
+        switchPanel(jPanelhienthiBandadat);
+        try {
+            pSm = conn.prepareStatement("SELECT * from datBan");
+            rs = pSm.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) jTable4.getModel();
+            tm.setRowCount(0);
+            while (rs.next()) {
+                Object o[] = {rs.getString("idDatban"), rs.getString("soBan"), rs.getString("userName"),rs.getString("soNguoi"),rs.getString("timeDatban"),rs.getString("yeuCau")}; 
+                tm.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }
+    }
+    
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         int i = jTable4.getSelectedRow();
         TableModel model = jTable4.getModel();
@@ -1447,7 +1463,7 @@ public class HomeAdmin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+ 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

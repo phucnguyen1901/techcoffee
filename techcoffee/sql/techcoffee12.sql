@@ -20,7 +20,6 @@ create table if not exists datBan (
 );
 
 
-
 create table if not exists history_users (
 	idHistory int not null primary key AUTO_INCREMENT,
     userNameH char(16) not null,
@@ -53,22 +52,20 @@ create table if not exists employee (
     primary key(idemployee)
 );
 
-
-
 create table if not exists save_add(
-	idemployee char(4) not null ,
-    emplyeename char(35) not null,
+	idsave_add int not null auto_increment,
+    idemployee_saveadd char(4) ,
     statuses char(10) not null, 
     date varchar(255) ,
-    primary key (idemployee)
+    primary key (idsave_add)
 );
 
 create table if not exists save_delete(
-	idemployee char(4) not null ,
-	emplyeename char(35) not null,
+	idsave_delete int auto_increment,
+	idemployee_savedelete char(4) ,
     statuses char(20) not null, 
     date varchar(255) ,
-    primary key (idemployee)
+	primary key (idsave_delete)
 );
 
 -- drop trigger add_history;
@@ -78,7 +75,7 @@ create trigger add_history before insert
 on employee 
 for each row
 begin
-	insert into save_add(idemployee,emplyeename,statuses,date) values(new.idemployee,new.emplyeename,"Added", now());
+	insert into save_add(idsave_add,idemployee_saveadd,statuses,date) values(null,new.idemployee,"Added", now());
 end$$
 delimiter ;
 
@@ -89,7 +86,7 @@ create trigger delete_history before delete
 on employee 
 for each row
 begin
-	insert into save_delete(idemployee,emplyeename,statuses,date) values(old.idemployee,old.emplyeename,"Deleted", now());
+	insert into save_delete(idsave_delete,idemployee_savedelete,statuses,date) values(null,old.idemployee,"Deleted", now());
 end$$
 delimiter ;
 
@@ -104,8 +101,9 @@ begin
 end$$
 delimiter ;
 
-insert into employee(idemployee,emplyeename,phonenumber,wage,workingday,birthday) values("nv1","nguyen van a","0947123456","2000000","1992-06-15","2019-06-06");
-insert into employee(idemployee,emplyeename,phonenumber,wage,workingday,birthday) values("bv1","nguyen van b","0909654123","3000000","1993-03-22","2019-06-06");
+insert into employee(idemployee,emplyeename,phonenumber,wage,workingday,birthday) values("nv1","nguyen van a","0947123456","2000000","2019-06-06","1992-06-15");
+insert into employee(idemployee,emplyeename,phonenumber,wage,workingday,birthday) values("bv1","nguyen van b","0909654123","3000000","2019-07-06","1993-03-22");
+insert into employee(idemployee,emplyeename,phonenumber,wage,workingday,birthday) values("bv2","nguyen van c","0909669636","3000000","2019-08-06","1993-03-22");
 
 -- thu tuc update du lieu
 delimiter $$

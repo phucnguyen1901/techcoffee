@@ -45,7 +45,7 @@ public class Login extends javax.swing.JFrame {
     public void connectDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
             System.out.print("Connect is success");
 
         } catch (Exception e) {
