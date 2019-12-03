@@ -19,21 +19,23 @@ create table if not exists datBan (
     yeuCau nvarchar(1000)
 );
 
+
+
 create table if not exists history_users (
 	idHistory int not null primary key AUTO_INCREMENT,
     userNameH char(16) not null,
     TimeH nvarchar(100) not null,
     noiDung nvarchar(100) not null
 );
-create table if not exists feelback (
-	idfeelback int not null primary key AUTO_INCREMENT,
+create table if not exists feedback (
+	idfeedback int not null primary key AUTO_INCREMENT,
     userNameF char(16) not null,
     TimeF nvarchar(100) not null,
     noiDung nvarchar(500) not null
 );
 
 
-insert into feelback values(null,"username1","12h","hahahhahahhahha");
+insert into feedback values(null,"username1","12h","hahahhahahhahha");
 
 insert into users(username,passwd,check_admin) values("username1","123","0");
 insert into users(username,passwd,check_admin) values("admin1","123","1");
@@ -50,6 +52,7 @@ create table if not exists employee (
 	birthday date not null,
     primary key(idemployee)
 );
+
 
 
 create table if not exists save_add(

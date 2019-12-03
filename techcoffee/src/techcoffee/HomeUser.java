@@ -1646,7 +1646,7 @@ public class HomeUser extends javax.swing.JFrame {
         }else{
         PreparedStatement pSm= null;
         try{
-        pSm = conn.prepareStatement("insert into feelback(userNameF,TimeF,noiDung) values(?,?,?)");
+        pSm = conn.prepareStatement("insert into feedback(userNameF,TimeF,noiDung) values(?,?,?)");
         pSm.setString(1, usernamesession);
         String timeF=hour+":"+minute+" date:"+day+"/"+month+"/"+year;
         pSm.setString(2, timeF);
