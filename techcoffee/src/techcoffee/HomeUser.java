@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -119,7 +120,7 @@ public class HomeUser extends javax.swing.JFrame {
         try{
             
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=000001");     
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?"+"user=root&password=H_Ghost");     
         }catch(Exception ex){
             System.out.println("That Bai");
             System.out.println("SQL exception: "+ex.getMessage());
@@ -341,6 +342,34 @@ public class HomeUser extends javax.swing.JFrame {
         }
     }
     
+    private void update_history(String nd){
+        ResultSet rs =null;
+        PreparedStatement pSm= null;
+        try{
+        pSm = conn.prepareStatement("insert into history_users(userNameH,TimeH,noiDung) values(?,?,?)");
+        pSm.setString(1, usernamesession);
+        String time1=hour+":"+minute+" ngay: "+day+"-"+month+"-"+year;
+        pSm.setString(2,time1 );
+        pSm.setString(3,nd);
+        pSm.executeUpdate();
+        }catch(Exception ex){
+            System.out.println("SQL exception: "+ex.getMessage());
+        }finally{
+            //Giai phong
+            if(rs!=null){
+               try{
+                   rs.close();    
+               }catch(SQLException sqlEx){}
+               rs=null;
+            }
+            if(pSm!= null){
+                try{
+                    pSm.close();
+                }catch(SQLException sqlEx){}
+                pSm=null;
+            }
+        }
+    }
     
     public HomeUser() {
         initComponents();
@@ -447,6 +476,8 @@ public class HomeUser extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         lbTitle = new javax.swing.JLabel();
         PanelHistory = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbHistory = new javax.swing.JTable();
         PanelProfile = new javax.swing.JPanel();
         lbStaff1 = new javax.swing.JLabel();
         lbNameuser2 = new javax.swing.JLabel();
@@ -1077,7 +1108,24 @@ public class HomeUser extends javax.swing.JFrame {
         Container.add(PanelFormDB, "card3");
 
         PanelHistory.setBackground(new java.awt.Color(255, 255, 255));
+        PanelHistory.setMinimumSize(new java.awt.Dimension(690, 360));
         PanelHistory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbHistory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Thời Gian", "Nội Dung"
+            }
+        ));
+        jScrollPane3.setViewportView(tbHistory);
+
+        PanelHistory.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 660, 210));
+
         Container.add(PanelHistory, "card3");
 
         PanelProfile.setBackground(new java.awt.Color(255, 255, 255));
@@ -1147,6 +1195,20 @@ public class HomeUser extends javax.swing.JFrame {
         ind_4.setOpaque(true);
         resetColor(new JPanel[]{btn_2,btn_5},new JPanel[]{ind_2,ind_5});
         switchPanel(PanelHistory);
+        PreparedStatement pSm=null;
+        ResultSet rs =null;
+        try {
+            pSm = conn.prepareStatement("SELECT * from history_users");
+            rs = pSm.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tbHistory.getModel();
+            tm.setRowCount(0);
+            while (rs.next()) {
+                Object o[] = {rs.getString("idHistory"), rs.getString("TimeH"), rs.getString("noiDung")}; 
+                tm.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }
     }//GEN-LAST:event_btn_4MousePressed
 
     private void btn_5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_5MousePressed
@@ -1459,6 +1521,7 @@ public class HomeUser extends javax.swing.JFrame {
             }        
         }
         setTichDiem(usernamesession);
+        update_history("Đặt bàn: "+bann);
         switchPanel(PanelHome);
     }//GEN-LAST:event_btnDatMouseClicked
 
@@ -1594,6 +1657,7 @@ public class HomeUser extends javax.swing.JFrame {
                     cStmt=null;
                 }
             }
+            update_history("Đổi mật khẩu");
         }
         }
         }
@@ -1613,6 +1677,7 @@ public class HomeUser extends javax.swing.JFrame {
             cStmt.setString(1,usernamesession); 
             cStmt.setInt(2,15); 
             rs = cStmt.executeQuery();
+            update_history("Xác nhận nhận thưởng");
             JOptionPane.showMessageDialog(this,"Chúc mừng bạn! hãy đến techcoffe để nhận thưởng trực tiếp");
             }catch(Exception ex){
                 System.out.println("SQL exception: "+ex.getMessage());
@@ -1771,6 +1836,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbBack;
     private javax.swing.JLabel lbBack1;
@@ -1813,6 +1879,7 @@ public class HomeUser extends javax.swing.JFrame {
     private javax.swing.JLabel lbWelcome6;
     private javax.swing.JLabel lbWelcome7;
     private javax.swing.JTextArea tAPhanHoi;
+    private javax.swing.JTable tbHistory;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

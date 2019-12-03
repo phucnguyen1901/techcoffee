@@ -38,7 +38,7 @@ public class HomeAdmin extends javax.swing.JFrame {
     public void connectDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=000001");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/techcoffee?" + "user=root&password=H_Ghost");
             pSm = conn.prepareCall("SELECT * from users where username=? and passwd=? and check_admin=?");
             System.out.print("Connect is success");
 
